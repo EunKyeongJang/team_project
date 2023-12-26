@@ -1,0 +1,33 @@
+<카테고리>
+  categoryArray = [{
+    cname :
+    cno	  :
+  }]
+
+<메뉴>
+  productArray=[{
+    cno :
+    pno :
+    pname :
+    pimg :
+    pprice :
+  }]
+
+<카트>
+  cartArray=[{
+    pno :
+    count :
+  }]
+
+<주문내역>
+  orderArray=[{
+    orderNo :
+    pno :
+    orderDate :
+    orderStatus :
+    totalPrice :
+    count :
+  }]
+
+<관리자 메뉴>
+-보류-
