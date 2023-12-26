@@ -6,7 +6,9 @@
 }
 *{font-family: 'seolleimcool-SemiBold';box-sizing: border-box;
 border: 1px solid}
-body{width: 900px;}
-#wrap{display: flex;flex-direction:column;}
+body{width: 900px;text-align: center;}
+#wrap{display: flex ;flex-direction:column;}
+
+
 
 

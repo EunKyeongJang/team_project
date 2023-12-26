@@ -7,19 +7,26 @@
     <title>Page Title</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link rel='stylesheet' type='text/css' media='screen' href='sum.css'>
-    <script src='sum.js'></script>
+    
 </head>
 
 <body>
     <div id="wrap">
         <h1>매출관리</h1>
         <table id="salesTb">
+            <thead>
+            <th id="orderNum">주문번호</th>
             <th id="day">날짜</th>
             <th id="sales">매출</th>
             <th id="daySales">일별매출액</th>
+            </thead>
+            <tbody id="content">
+                          
+            </tbody>
         </table>
-        <div id="totalSales">총액:</div>
+        <div id="totalSales">총매출액: </div>
     </div>
+    <script src='sum.js'></script>
 </body>
 
 </html>
