@@ -57,6 +57,8 @@ const cno4ProductArray=[
     {pno:19,  cno:4, pname:'음료(유산균)', pimg:'사이드음료_음료(유산균).png', pprice:1000}
 ] */
 
+
+// ========================== 메뉴 리스트 ========================== //
 const productArray=[
     {pno:1,  cno:1, pname:'엽기메뉴', pimg:'/img/메인메뉴_엽기메뉴.png', pprice:14000},
     {pno:2,  cno:1, pname:'로제메뉴', pimg:'/img/메인메뉴_로제메뉴.png', pprice:16000},
@@ -92,7 +94,7 @@ const productArray=[
     {pno:32,  cno:4, pname:'음료(유산균)', pimg:'/img/사이드음료_음료(유산균).png', pprice:1000}
 ]
 
-
+const cartArray=[];
 
 // ========================== 로컬스토리지 등록 ========================== //
 localStorage.setItem('categoryArray',JSON.stringify(categoryArray));
@@ -102,8 +104,8 @@ localStorage.setItem('cno3ProductArray',JSON.stringify(cno3ProductArray));
 localStorage.setItem('cno4ProductArray',JSON.stringify(cno4ProductArray));
  */
 localStorage.setItem('productArray',JSON.stringify(productArray));
-// =========================== 카테고리 출력 =========================== //
 
+// =========================== 카테고리 출력 =========================== //
 categoryPrint(1)
 function categoryPrint(selectCno){
     const bottomHeader=document.querySelector('#bottomHeader>ul');
@@ -115,12 +117,13 @@ bottomHeader.innerHTML=html;
 productPrint(selectCno)
 }
 
+// =========================== 상품 출력 =========================== //
 function productPrint(selectCno){
     const main=document.querySelector('#main');
     let html='';
     for(i=0; i<productArray.length; i++){
         if(productArray[i].cno==selectCno){
-            html += `<div id="product">
+            html += `<div id="product" onclick="setCart(${productArray[i].pno})">
                         <div id="pimg"><img src="${productArray[i].pimg}"></div>
                         <div id="ppname">${productArray[i].pname}</div>
                         <div id="pprice">${productArray[i].pprice.toLocaleString()}원</div>
@@ -130,3 +133,7 @@ function productPrint(selectCno){
     main.innerHTML=html;
     return;
 }
+
+// =========================== 카트 배열 등록 =========================== //
+
+// =========================== 카트 출력 =========================== //
