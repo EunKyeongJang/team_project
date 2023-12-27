@@ -1,6 +1,6 @@
 /* 메인페이지 css 작성_박효성 */
 
-/* div{border: 1px solid red;padding: 1px;} */
+div{border: 1px solid red;padding: 1px;}
 /* #header, #main, #footer{margin: 10px 10px;} */
 *{padding: 0; margin: 0;}
 
@@ -35,9 +35,12 @@
 li{list-style: none;}
 
 
-/* 상품 출력 CSS */
+/* ============== 상품 출력 CSS ============== */
 #main{display: flex; flex-wrap: wrap; height: 500px; overflow-y: scroll;}
-#product{width: 200px; height: 300px; margin: 10px; padding: 10px; border: 1px solid #D9D9D9;}
+#product{width: 170px; height: 300px; margin: 10px; padding: 10px; border: 1px solid #D9D9D9;}
 #pimg>img{width: 100%;}
 #ppname{align-items: center; text-align: center; font-size: 30px; color: #BF3415; margin: 5px;}
 #pprice{align-items: center; text-align: center; font-size: 25px; color: #D98859; margin: 5px;}
+
+/* ============== 카트 출력 CSS ============== */
+#footer{height: 200px;}

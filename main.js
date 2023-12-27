@@ -89,7 +89,7 @@ const productArray=[
     {pno:29,  cno:4, pname:'바삭치즈만두(7개)', pimg:'/img/사이드음료_바삭치즈만두(7개).png', pprice:2000},
     {pno:30,  cno:4, pname:'엽도그', pimg:'/img/사이드음료_엽도그.png', pprice:2000},
     {pno:31,  cno:4, pname:'공기밥', pimg:'/img/사이드음료_공기밥.png', pprice:1000},
-    {pno:32,  cno:4, pname:'음료(유산균)', pimg:'사이드음료_음료(유산균).png', pprice:1000}
+    {pno:32,  cno:4, pname:'음료(유산균)', pimg:'/img/사이드음료_음료(유산균).png', pprice:1000}
 ]
 
 
