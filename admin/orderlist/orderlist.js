@@ -13,7 +13,7 @@
     가격 : 카트 객체의 메뉴번호를 받아서 메뉴 번호의 해당 가격 * 카트 객체의 개수
 */
 
-const 결제Array=[[{pno:2,count:4},{pno:3,count:4}]] //주문내역 페이지에 넘어올 카트 배열을 저장할 배열\
+const 결제Array=[ ] //주문내역 페이지에 넘어올 카트 배열을 저장할 배열\
 const cartArray=[{pno:2,count:4},{pno:3,count:4}]
 
 let productArray=[
@@ -26,15 +26,20 @@ let productArray=[
 console.log(cartArray);
 //--------함수 1--------------------
 function 결제(){// 주문하기 눌렀을 때 실행될 함수
-   let cart1=cartArray
-    결제Array.push(cart1) // 카트에 담겨있던 배열 객체를 결제Array 배열로 저장
-    console.log(결제Array);
-    // cartArray=[] // 결제Array push가 끝나면 cartArray는 초기화
-    결제내역();
-}
+    let cart1=cartArray
+    let count=0;
+    count++
+    let art2={list:count,cart:cart1}
+     결제Array.push(art2) // 카트에 담겨있던 배열 객체를 결제Array 배열로 저장
+     console.log(결제Array);
+     // cartArray=[] // 결제Array push가 끝나면 cartArray는 초기화
+     결제내역();
+ }
 
 //--------함수 2------------------
 function 결제내역(){
+    // 결제Array.cart.pno??
+    /* 다시 해보기
     console.log('결제내역()함수');
         const 결제내역창 = document.querySelector('tbody')
         let html=``;
@@ -65,5 +70,5 @@ function 결제내역(){
                 }
             }    
         결제내역창.innerHTML=html; 
-    }
+    } */
 }
