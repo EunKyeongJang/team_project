@@ -13,9 +13,9 @@
     가격 : 카트 객체의 메뉴번호를 받아서 메뉴 번호의 해당 가격 * 카트 객체의 개수
 */
 
-const 결제Array=[ ] //주문내역 페이지에 넘어올 카트 배열을 저장할 배열\
+const 결제Array=[] //주문내역 페이지에 넘어올 카트 배열을 저장할 배열\
 const cartArray=[{pno:2,count:4},{pno:3,count:4}]
-
+결제Array
 let productArray=[
     {pno:1, pname:'몬스터와퍼', pprice:9500, pimg:'몬스터와퍼.png', cno:3},
     {pno:2, pname:'블랙바비큐와퍼', pprice:10500, pimg:'블랙바비큐와퍼.png', cno:2},
@@ -26,18 +26,33 @@ let productArray=[
 console.log(cartArray);
 //--------함수 1--------------------
 function 결제(){// 주문하기 눌렀을 때 실행될 함수
-    let cart1=cartArray
-    let count=0;
-    count++
-    let art2={list:count,cart:cart1}
-     결제Array.push(art2) // 카트에 담겨있던 배열 객체를 결제Array 배열로 저장
-     console.log(결제Array);
-     // cartArray=[] // 결제Array push가 끝나면 cartArray는 초기화
-     결제내역();
+    let count1=0
+    count1 ++
+    cartArray.count=count1
+     결제Array.push(cartArray) // 카트에 담겨있던 배열 객체를 결제Array 배열로 저장
+    //  console.log(결제Array);
+    //  // cartArray=[] // 결제Array push가 끝나면 cartArray는 초기화
+    //  결제내역();
+
  }
 
 //--------함수 2------------------
 function 결제내역(){
+    let html=``;
+    let count=0;
+    count++
+    html+=` <tr>
+    <th>${count}</th> 
+    <th>${productArray[j].pno}</th>
+    <th>${new Date().toLocaleDateString()}</th> 
+    <select>
+        <option>결제완료</option>
+        <option>조리중</option>
+        <option>픽업완료</option>
+    </select>
+    <th>${productArray[j].pprice*결제Array[i][l].count}</th>
+    <th>${결제Array[i][l].count}</th>
+    </tr>`
     // 결제Array.cart.pno??
     /* 다시 해보기
     console.log('결제내역()함수');
@@ -72,3 +87,5 @@ function 결제내역(){
         결제내역창.innerHTML=html; 
     } */
 }
+
+new Date().toLocaleDateString()
