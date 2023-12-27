@@ -1,4 +1,4 @@
-<!-- 메인페이지 html작성_박효성 test2 -->
+<!-- 메인페이지 html작성_박효성 -->
 
 <!DOCTYPE html>
 <html>
@@ -7,8 +7,8 @@
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <title>Page Title</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <link rel='stylesheet' type='text/css' media='screen' href='rayout.css'>
-    <script src='main.js'></script>
+    <link rel='stylesheet' type='text/css' media='screen' href='/css/main.css'>
+
 </head>
 <body>
     <div id="wrap">
@@ -19,23 +19,30 @@
             </div>
             <div id="bottomHeader">
                 <ul>
-                    <li class="selectMenu">메인메뉴</li>
+                 <!--    <li class="selectMenu">메인메뉴</li>
                     <li>닭발메뉴</li>
                     <li>세트메뉴</li>
-                    <li>사이드/음료</li>
+                    <li>사이드/음료</li> -->
                 </ul>
             </div>
         </div>
-        <div id="main">메인(본문)
-            <div>메뉴1</div>
-            <div>메뉴1</div>
-            <div>메뉴1</div>
-            <div>메뉴1</div>
+        <div id="main">
+            <div id="product">
+                <div id="pimg"><img src="img/메인메뉴_엽기메뉴.png"></div>
+                <div id="ppname">엽기떡볶이</div>
+                <div id="pprice">14,000원</div>
+            </div>
+            <div id="product">
+                <div id="pimg"><img src="img/메인메뉴_엽기메뉴.png"></div>
+                <div id="ppname">엽기떡볶이</div>
+                <div id="pprice">14,000원</div>
+            </div>
         </div>
-        <div id="footer">푸터
+<!--         <div id="footer">푸터
             <div>메뉴 수량 가격</div>
             <div>장바구니</div>
-        </div>
+        </div> -->
     </div>
+    <script src='/main.js'></script>
 </body>
 </html>
