@@ -1,1 +1,33 @@
 /* 메인페이지 css 작성_박효성 */
+
+/* div{border: 1px solid red;padding: 1px;} */
+/* #header, #main, #footer{margin: 10px 10px;} */
+*{padding: 0; margin: 0;}
+
+/* 폰트적용 */
+@font-face {
+    font-family: 'seolleimcool-SemiBold';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2312-1@1.1/seolleimcool-SemiBold.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+*{font-family: 'seolleimcool-SemiBold'}
+
+/* 전체크기 및 가운데정렬 */
+#wrap{width: 900px; margin: 0 auto;}
+
+/* ============== 헤더 윗부분 ============== */
+#header{height: 200px;}
+#topHeader{width: 300px; display: flex; margin: 0 auto; justify-content: center; align-items: center;}
+.topTitle, .topImg{margin: 5px;}
+.topTitle > span{color: #D9D9D9; background-color: #730202; border-radius: 10px;
+                    padding: 10px; font-weight: bold; font-size: 30px;}
+
+
+/* ============== 헤더 아래부분 ============== */
+#bottomHeader > ul{display: flex; justify-content: space-around;
+                    align-items: center; text-align: center;}
+#bottomHeader > ul > .selectMenu{width: 80px; background-color: #730202; color: #D9D9D9;
+                                    padding: 10px; font-weight: bold; border-radius: 10px;}
+/* 리스트 글머리 제거 */                                    
+li{list-style: none;}
