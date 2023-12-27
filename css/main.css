@@ -1,6 +1,6 @@
 /* 메인페이지 css 작성_박효성 */
-
-div{border: 1px solid red;padding: 1px;}
+/* 
+div{border: 1px solid red;padding: 1px;} */
 /* #header, #main, #footer{margin: 10px 10px;} */
 *{padding: 0; margin: 0;}
 
@@ -43,10 +43,9 @@ li{list-style: none;}
 #pprice{align-items: center; text-align: center; font-size: 25px; color: #D98859; margin: 5px;}
 
 /* ============== 카트 출력 CSS ============== */
-#cartTitle{display: flex; justify-content: space-around; height: 50px;}
-#cartTitle > div{width: 200px; text-align: center;}
-    #cartTitleMenu{color: #BF3415; font-size: 20px;}
-    #cartTitlePrice{color: #D98859; font-size: 20px;}
-    #cartTitleCount{color: #D98859; font-size: 20px;}
-#cart{height:150px; overflow-y: scroll;}
-#cartCount{display: flex;}
+#footerTop{display: flex; justify-content: space-around;}
+#footerTop>div:nth-child(1){color: #BF3415; font-size: 20px;}
+#footerTop>div:nth-child(3){color: #D98859; font-size: 20px;}
+#footerBottom{display: flex; justify-content: space-around;}
+#footerBottom>div:nth-child(1){color: #BF3415; font-size: 20px;}
+#footerBottom>div:nth-child(2){color: #D98859; font-size: 20px;}
