@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset='utf-8'>
+  <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+  <title>Page Title</title>
+  <meta name='viewport' content='width=device-width, initial-scale=1'>
+  <link rel='stylesheet' type='text/css' media='screen' href='manage.css'>
+  
+</head>
+<body>
+
+     <!-- ==============관리자메뉴=============== -->
+     <div>
+      <h3>관리자 메뉴</h3>
+
+      <!-- 카테고리 등록 -->
+      <div> 
+          <h3>카테고리 등록</h3>
+          <input id="inputCnum" type="text" placeholder="카테고리 고유번호"/>             
+          <input id="inputCname" type="text" placeholder="카테고리 명"/>             
+          <input onclick="inputCategory()" type="button" value="등록">
+      </div>
+      <!-- 카테고리 등록 end -->
+
+      <!-- 제품등록 -->
+      <div>
+          <h3>제품등록</h3>
+
+          <!-- 등록할 제품의 카테고리 선택 -->
+          <select onclick="printCno(`selectCategory`, `selectCno`)" id="selectCategory">
+              
+          </select>
+
+          <input id="selectCno" type="text" placeholder="카테고리 고유번호" readonly>
+          <!-- 카테고리 번호 :<span id="selectCno">   </span> -->
+          <!-- 등록할 제품의 카테고리 선택 end -->
+          
+          <!-- 제품 입력 및등록 -->
+          <input id="inputPname" type="text" placeholder="제품 명"/>
+          <input id="inputPno" type="text" placeholder="제품 고유번호"/>             
+          <input id="inputPrice" type="text" placeholder="제품 가격"/>
+          <input id="inputPimg" type="file">
+          <input onclick="inputProduct()" type="button" value="등록">
+          <input onclick="printPlist()" type="button" value="검색" />
+          <!-- 제품 입력 및등록 end -->
+
+      </div>
+      <!-- 제품등록 end -->
+
+      <!-- 결제내역 -->
+      <div>
+          <!-- 결제내역 테이블 -->
+          <table>
+              <tr>                    
+                  <th>제품 고유번호</th>
+                  <th>제품명</th>
+                  <th>제품가격</th>
+                  <th>제품이미지</th>
+              </tr>
+
+              <!-- 제품 리스트-->
+              <tbody id="plist">
+
+              </tbody>
+              <!-- 제품 리스트 end -->
+              
+
+          </table>
+          <!-- 결제내역 테이블 end -->
+      </div>
+      <!-- 결제내역 end -->
+  </div>
+  <!-- ==============관리자메뉴 end=============== -->
+
+  <script src='manage.js'></script>
+  
+</body>
+</html>
