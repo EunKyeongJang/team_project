@@ -35,6 +35,11 @@ function inputCategory(){   console.log(`카테고리 등록함수 실행`);
     const inputCnum=document.querySelector('#inputCnum').value;
     const inputCname=document.querySelector('#inputCname').value;
 
+    //유효성 검사
+    for(let z=0; z<categoryArray.length; z++){
+        if(inputCnum==categoryArray[z].cno){ alert('존재하는 카테고리번호입니다.'); return;}
+    }
+
     categoryArray.push({cno : inputCnum, cname : inputCname});
     console.log(categoryArray);
 
@@ -84,6 +89,11 @@ function inputProduct(){    console.log(`제품등록함수 실행`);
     let inputPrice=document.querySelector("#inputPrice").value;
     let inputPno=document.querySelector('#inputPno').value;
 
+    //유효성 검사
+    for(let z=0; z<productArray.length; z++){
+        if(inputPno==productArray[z].pno){ alert('존재하는 제품번호입니다.'); return;}
+    }
+
     //이미지 경로 가공(절대경로 : 오류발생, 상대경로로 바꾸기)
     let newImg=inputPimg.split('\\')[2];
     console.log(inputPimg.split('\\')[2]);
@@ -120,9 +130,11 @@ let selectCno=document.querySelector('#selectCno').value;
 console.log(selectCno);
 
 let html=``;
+let x=0;
 
 for(let i=0; i<productArray.length; i++){
         if(productArray[i].cno==selectCno){   //선택된 버튼에 따라 카테고리별로 출력할지, 모든제품을 출력할지
+            x++;
             html+=`<!-- 제품 1개 -->
                 <tr>
                     <td>${productArray[i].pno}</td>
@@ -138,6 +150,11 @@ for(let i=0; i<productArray.length; i++){
         }
     }
 
+if(x==0){   //만약 카테고리에 출력되는 제품이 없다면 '카테고리 삭제' 버튼 생성
+    html+=`<tr>
+        <td><input onclick="deleteCategory(${selectCno})" type="button" value="카테고리삭제"></td>
+        </tr>`;
+}
 
 plist.innerHTML=html;
 }
@@ -146,27 +163,53 @@ plist.innerHTML=html;
 
 
 //===========제품리스트 수정=============
-    //제품수정 함수
-function changeProduct(changePno){  console.log(`제품수정 함수 실행`);
-    const changTable=document.querySelector(`tr[value='${changePno}']`);
+    //제품수정 폼 출력 함수
+function changeProduct(changePno){  console.log(`제품수정 폼 출력 함수 실행`);
+    const changeTable=document.querySelector(`tr[value='${changePno}']`);
     let changePname=``;
     let changePprice=``;
 
-    for(let i=0; i<productArray.length; i++){   //기존 정보 불러오기
+    for(let i=0; i<productArray.length; i++){   //기존 정보 불러오기(제품이름, 제품가격)
         if(changePno==productArray[i].pno){
             changePname=productArray[i].pname;
             changePprice=productArray[i].pprice;
         }
     }
-
+    //제품수정 폼
     let html=`<td> <input id="changePno" type="text" placeholder="${changePno}" disabled/>  </td>
-    <td> <input id="changePname" type="text" placeholder="${changePname}"/> </td>
-    <td> <input id="changePprice" type="text" placeholder="${changePprice}"/> </td>
-    <td> <input id="changePimg" type="file"> </td>`;
+            <td> <input id="changePname" type="text" placeholder="${changePname}"/> </td>
+            <td> <input id="changePprice" type="text" placeholder="${changePprice}"/> </td>
+            <td> <input id="changePimg" type="file"> </td>
+            <td><input onclick="changePermit(${changePno})" type="button" value="확인"></td>
+            <td><input onclick="changeCancel(${changePno})" type="button" value="취소"></td>`;
 
-    changTable.innerHTML=html;  //수정테이블 아래에 띄우기
+    changeTable.innerHTML=html;  //수정테이블 아래에 띄우기
 
 }
+
+    //제품수정>확인 클릭
+function changePermit(changePno){   console.log(`제품수정 확인클릭 실행`);
+    const changePname=document.querySelector('#changePname').value;
+    const changePprice=document.querySelector('#changePprice').value;
+    const changePimg=document.querySelector('#changePimg').value;
+
+    for(let i=0; i<productArray.length; i++){   //작성한 정보로 수정하기
+        if(productArray[i].pno==changePno){
+            productArray[i].pname=changePname;
+            productArray[i].pprice=changePprice;
+            productArray[i].pimg=changePimg;
+        }
+    }
+
+    printPlist()    //리스트 재출력
+}
+
+    //제품수정>취소 클릭
+function changeCancel(changePno){   console.log(`제품수정 취소클릭 실행`);
+    printPlist();
+}
+
+
 
 
 //===========제품리스트 수정 end=============
@@ -185,6 +228,21 @@ function deleteProduct(deletePno){  console.log(`제품 삭제 함수 실행`);
     printPlist()
 }//f end
 
+    //카테고리 삭제
+function deleteCategory(selectCno){ console.log(`카테고리 삭제함수 실행`);
+
+    for(let i=0; i<categoryArray.length; i++){
+        if(selectCno==categoryArray[i].cno){
+            categoryArray.splice(i,1);
+        }
+    }
+
+    //카테고리 출력
+    inputSelect(`selectCategory`);
+    printPlist();
+
+    console.log(categoryArray);
+}
 //===========제품리스트 삭제 end=============
 
-//===================제품리스트 수정/삭제======================
+//===================제품리스트 수정/삭제 end======================
