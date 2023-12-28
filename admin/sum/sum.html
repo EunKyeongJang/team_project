@@ -13,30 +13,38 @@
 <body>
     <div id="wrap">
         <h1>매출관리</h1>
+        <div id="salesGraph">
+            <table>
+                <thead>
+                    <th onclick="" id="day2">날짜</th>
+                    <th id="daysales">일별매출액</th>
+                </thead>
+                <tbody id="days">
+                    
+                </tbody>
+                
+            </table>
+            <div id="totalBox">
+                <span>총매출액: </span>
+                <span id="totalSales"> </span> 
+            </div>
+        </div>
         <table id="salesTb">
             <thead>
                 <th id="orderNum">주문번호</th>
-                <th id="day">날짜</th>
-                <th id="sales">매출</th>
+                <th id="day">메뉴</th>
+                <th id="count">개수</th>
+                <th id="sales">가격</th>
+                
             </thead>
             <tbody id="content">
                           
             </tbody>
         </table>
-        <div id="totalSales">총매출액: </div>
+        
         
     </div>
-    <div id="salesGraph">
-        <table>
-            <thead>
-                <th onclick="역순()" id="day2">날짜</th>
-                <th id="daysales">일별매출액</th>
-            </thead>
-            <tbody id="days">
-                
-            </tbody>
-        </table>
-    </div>
+    
     <script src='sum.js'></script>
 </body>
 
