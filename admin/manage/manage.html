@@ -24,14 +24,14 @@
                 <div id="categoryBox">
                     <input id="inputCnum" type="text" placeholder="카테고리 고유번호"/>             
                     <input id="inputCname" type="text" placeholder="카테고리 명"/>             
-                    <input onclick="inputCategory()" type="button" value="등록">
+                    <input class="btnCss" onclick="inputCategory()" type="button" value="등록">
                 </div>
 
                 <table id="categoryList">
                     <tr>
                         <th class="colwidthA">카테고리번호</th>
                         <th class="colwidthB">카테고리 명</th>
-                        <th class="colwidthㅊ">비고</th>
+                        <th class="colwidthC">비고</th>
                     </tr>
                     <!-- list 1개 -->
                     <tr>
@@ -77,8 +77,8 @@
                         <input id="inputPno" type="text" placeholder="제품 번호"/>             
                         <input id="inputPrice" type="text" placeholder="제품 가격"/>
                         <input onchange="inputImg(event)" id="inputPimg" type="file">
-                        <input onclick="inputProduct()" type="button" value="등록">
-                        <input onclick="printPlist()" type="button" value="검색" />
+                        <input class="btnCss" onclick="inputProduct()" type="button" value="등록">
+                        <input class="btnCss" onclick="printPlist()" type="button" value="검색" />
                     </div>                
                     <!-- 제품 입력 및등록 end -->
                 </div>
@@ -107,6 +107,8 @@
                                 <td class="a"><input onclick="changeProduct()" type="button" value="수정">
                                 <input onclick="deleteProduct()" type="button" value="삭제"></td>
                             </tr>
+
+                            <!-- 제품수정 테이블-->
                             <tr id="rewordProduct" value="1">       
                                 <td> <input id="changePno" type="text" disabled/>  </td>
                                 <td> <input id="changePname" type="text" placeholder="수정할 이름"/> </td>
@@ -123,7 +125,7 @@
                                 <td>엽떡</td>
                                 <td>17000</td>
                                 <td><img src='img/엽떡.png' /></td>
-                                <td><input onclick="changeProduct()" type="button" value="수정">
+                                <td class="a"><input onclick="changeProduct()" type="button" value="수정">
                                 <input onclick="deleteProduct()" type="button" value="삭제"></td>
                             </tr>
                             <tr value="1">                </tr>
