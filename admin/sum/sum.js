@@ -10,13 +10,13 @@ localStorage.setItem('productArray', JSON.stringify(productArray));
 
 const orderArray = [{ orderNo: 1, pno: 1, orderDate: '2023-12-24', count: 4, totalPrice: 68000 },
 { orderNo: 1, pno: 2, orderDate: '2023-12-24', count: 2, totalPrice: 30000 },
-{ orderNo: 2, pno: 1, orderDate: '2023-12-26', count: 1, totalPrice: 17000 },
-{ orderNo: 2, pno: 2, orderDate: '2023-12-26', count: 5, totalPrice: 75000 },
-{ orderNo: 3, pno: 1, orderDate: '2023-12-27', count: 1, totalPrice: 17000 },
-{ orderNo: 3, pno: 2, orderDate: '2023-12-27', count: 3, totalPrice: 45000 },
+{ orderNo: 2, pno: 1, orderDate: '2023-12-25', count: 4, totalPrice: 68000 },
+{ orderNo: 3, pno: 2, orderDate: '2023-12-26', count: 5, totalPrice: 75000 },
 { orderNo: 4, pno: 1, orderDate: '2023-12-27', count: 1, totalPrice: 17000 },
-{ orderNo: 4, pno: 1, orderDate: '2023-12-27', count: 2, totalPrice: 34000 },
-{ orderNo: 4, pno: 2, orderDate: '2023-12-27', count: 1, totalPrice: 30000 }
+{ orderNo: 4, pno: 2, orderDate: '2023-12-27', count: 3, totalPrice: 45000 },
+{ orderNo: 5, pno: 1, orderDate: '2023-12-27', count: 3, totalPrice: 51000 },
+{ orderNo: 6, pno: 1, orderDate: '2023-12-28', count: 2, totalPrice: 34000 },
+{ orderNo: 6, pno: 2, orderDate: '2023-12-28', count: 1, totalPrice: 30000 }
 ]
 localStorage.setItem('orderArray', JSON.stringify(orderArray));
 const 관리자카테고리 = [{ 관리자카테고리번호: 1, 카테고리이름: '주문내역', '출력함수()': '주문내역()' },
@@ -30,6 +30,7 @@ function 매출() {
     // html 위치연결
     const content = document.querySelector('#content');
     const total = document.querySelector('#totalSales');
+    const days =document.querySelector('#days');
 
     // 로컬스토리지에서 주문내역 불러오기
     let info = JSON.parse(localStorage.getItem('orderArray')); console.log(info);
@@ -49,7 +50,6 @@ function 매출() {
 
         }
     }
-
     // 일별 매출액
     console.log(info);
     for(let c= 0;c<info.length;c++){
@@ -57,14 +57,29 @@ function 매출() {
         for(let d= 0;d<info.length;d++){
             if (c != d && info[c].orderDate == info[d].orderDate){
                 info[c].daySales+=info[d].totalPrice;
+            }
         }
-    }
-        console.log(info[c].daySales)
     }   
-
+    let dayArray=[...info]; console.log(dayArray);
+    
+     for(let f= 0;f<dayArray.length;f++){
+        for(let g= 0;g<dayArray.length;g++){
+            if (f != g && dayArray[f].orderDate == dayArray[g].orderDate){
+                console.log(info);dayArray.splice(g, 1);
+                console.log(info);
+            }
+        }
+    }  
+    // 일별매출액 출력
+    let html1= ''
+    for(let e=0;e<dayArray.length;e++){
+        html1 +=`<tr>
+        <td>${dayArray[e].orderDate}</td>
+        <td>${dayArray[e].daySales.toLocaleString()}</td> 
+        </tr>`
+    } 
     // 내역 출력하기
     let html = '';
-
     for (let i = 0; i < info.length; i++) {
         html += ` <tr>
         <td>${info[i].orderNo}</td>
@@ -72,7 +87,34 @@ function 매출() {
         <td>${info[i].totalPrice.toLocaleString()}</td> 
         </tr> `
     }
-
     total.innerHTML += totalSales.toLocaleString() + '원';
     content.innerHTML = html
+    days.innerHTML= html1
+}
+let trigger= 0;
+function 역순(){
+    console.log('역순()')
+    if (trigger==0){오름차순()}
+    else if(trigger==1){내림차순()}
+    
+}
+function 내림차순(){
+    let html1= ''
+    for(let e=dayArray.length-1;e>=0;e--){
+        html1 +=`<tr>
+        <td>${dayArray[e].orderDate}</td>
+        <td>${dayArray[e].daySales.toLocaleString()}</td> 
+        </tr>`
+    }
+    
+}
+
+function 오름차순(){
+    let html1= ''
+    for(let e=0;e<dayArray.length;e++){
+        html1 +=`<tr>
+        <td>${dayArray[e].orderDate}</td>
+        <td>${dayArray[e].daySales.toLocaleString()}</td> 
+        </tr>`
+    } 
 }
