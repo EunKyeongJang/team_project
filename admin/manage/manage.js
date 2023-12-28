@@ -10,9 +10,9 @@ let categoryArray = [
 
 /* 2. 제품목록 *제품 이미지명은 사진파일명이랑 동일하게 */
 let productArray=[
-{pno : 1, pname : '큐브스테이크와퍼', pprice : 19000, pimg : '큐브스테이크와퍼.png', cno : 1},
-{pno : 2, pname : '스파이시 큐브스테이크와퍼', pprice : 25000, pimg : '스파이시큐브스테이크와퍼.png', cno : 1},
-{pno : 3, pname : '더블비프불고기버거', pprice : 13000, pimg : '더블비프불고기버거.png', cno : 5}    
+{pno : 1, pname : '큐브스테이크와퍼', pprice : 19000, pimg : '', cno : 1},
+{pno : 2, pname : '스파이시 큐브스테이크와퍼', pprice : 25000, pimg : '', cno : 1},
+{pno : 3, pname : '더블비프불고기버거', pprice : 13000, pimg : '', cno : 5}    
 ]
 
 let cartArray=[
@@ -34,24 +34,49 @@ printCategory() //카테고리 리스트 출력
     //카테고리 등록함수
 function inputCategory(){   console.log(`카테고리 등록함수 실행`);
     const inputCnum=document.querySelector('#inputCnum').value;
-    const inputCname=document.querySelector('#inputCname').value;
+    const inputCname=document.querySelector('#inputCname').value;    
 
-    //유효성 검사
-    for(let z=0; z<categoryArray.length; z++){
-        if(inputCnum==categoryArray[z].cno){ alert('존재하는 카테고리번호입니다.'); return;}
+    //기존 localStorage 호출
+    let categoryArray = JSON.parse(localStorage.getItem('categoryArray')); console.log(categoryArray);
+    if(categoryArray==null){
+        categoryArray=[];    //만약에 localStorage에 아무것도 없으면 배열 선언
     }
 
-    categoryArray.push({cno : inputCnum, cname : inputCname});
+    //유효성 검사
+    if(inputCnum==''){ alert('카테고리 번호를 입력 해 주십시오.'); return; };
+    if(inputCname==''){ alert('카테고리 명을 입력 해 주십시오.'); return; };
+
+    for(let z=0; z<categoryArray.length; z++){//동일한번호/이름 이 존재하는지
+        if(inputCnum==categoryArray[z].cno){ alert('존재하는 카테고리번호 입니다.'); return;}
+        if(inputCname==categoryArray[z].cname){ alert('존재하는 카테고리이름 입니다.'); return; }
+    }
+
+    //객체화
+    const category={cno : inputCnum, cname : inputCname}
+
+    console.log(category)
+
+    categoryArray.push(category);
     console.log(categoryArray);
+
+    //storage에 저장
+    localStorage.setItem('categoryArray',JSON.stringify(categoryArray));
 
     document.querySelector("#inputCnum").value=``;
     document.querySelector("#inputCname").value=``;
+    document.querySelector('#selectCno').value=``;
 
     inputSelect(`selectCategory`);
+    printCategory();
 }//f end
 
     //카테고리 리스트 출력
 function printCategory(){  console.log('카테고리 리스트 출력함수 실행');
+    let categoryArray = JSON.parse(localStorage.getItem('categoryArray')); console.log(categoryArray);//기존 카테고리함수 호출
+    if(categoryArray==null){
+        categoryArray=[];    //만약에 localStorage에 아무것도 없으면 배열 선언
+    }
+
     const cOutput=document.querySelector('#cOutput');
     let html=``;
 
@@ -68,6 +93,11 @@ function printCategory(){  console.log('카테고리 리스트 출력함수 실�
 
     //등록된 카테고리 select에 추가
 function inputSelect(selectId){     console.log(`select에 추가함수 실행`);
+    let categoryArray = JSON.parse(localStorage.getItem('categoryArray')); console.log(categoryArray);//기존 카테고리함수 호출
+    if(categoryArray==null){
+        categoryArray=[];    //만약에 localStorage에 아무것도 없으면 배열 선언
+    }
+
     const selectCategory=document.querySelector(`#${selectId}`);
 
     let html=`<option value="" selected disabled hidden>카테고리 선택</option>`;  
@@ -85,6 +115,10 @@ function inputSelect(selectId){     console.log(`select에 추가함수 실행`)
 //==========제품등록============
     //카테고리 클릭 시 카테고리 번호 출력 함수
 function printCno(selectValue, outputId){   console.log('카테고리 번호 출력 함수 실행');
+    let categoryArray = JSON.parse(localStorage.getItem('categoryArray')); console.log(categoryArray);//기존 카테고리함수 호출
+        if(categoryArray==null){
+            categoryArray=[];    //만약에 localStorage에 아무것도 없으면 배열 선언
+        }
     //매개변수[selectValue : select Id, outputId : 번호출력할 input Id]     
     let selectCategory=document.querySelector(`#${selectValue}`).value;
 
@@ -125,6 +159,11 @@ function inputProduct(){    console.log(`제품등록함수 실행`);
     let inputPrice=document.querySelector("#inputPrice").value;
     let inputPno=document.querySelector('#inputPno').value;
 
+    let productArray = JSON.parse(localStorage.getItem('productArray')); console.log(productArray);//기존 카테고리함수 호출
+    if(productArray==null){
+        productArray=[];    //만약에 localStorage에 아무것도 없으면 배열 선언
+    }
+
     //유효성 검사
     for(let z=0; z<productArray.length; z++){
         if(inputPno==productArray[z].pno){ alert('존재하는 제품번호입니다.'); return;}
@@ -141,26 +180,30 @@ function inputProduct(){    console.log(`제품등록함수 실행`);
         alert('제품번호을 입력해 주십시오.');
         return;
     }
-    if(inputPimg==``){  //이미지 유효성
-        alert('이미지를 선택해 주십시오.');
-        return;
-    }
     if(inputPrice==``){  //가격 유효성
         alert('가격을 입력해 주십시오.');
         return;
     }
 
+    if(inputPimg==``){  //이미지 유효성
+        alert('이미지를 선택해 주십시오.');
+        return;
+    }
     //이미지는 inputImg 함수로 변환하여 사용(경로 -> byte) 사용
 
-     //제품 등록
-     productArray.push({
+    //제품정보 객체화
+    const product={
         pno : inputPno, 
         pname : inputPname, 
         pprice :inputPrice, 
         pimg : imgByte, 
         cno :  selectCno
-    })
-    console.log(productArray);
+    }
+     //제품 등록
+     productArray.push(product)
+    console.log(product);
+
+    localStorage.setItem('productArray',JSON.stringify(productArray));
 
     //value값 초기화
     document.querySelector("#inputPname").value=``;
@@ -178,13 +221,16 @@ function inputProduct(){    console.log(`제품등록함수 실행`);
 //===========제품리스트 출력=============
     //제품리스트 출력 함수
 function printPlist(){ console.log(`제품리스트 출력 함수 실행`)
-console.log('printPlist() 실행')
+    let productArray = JSON.parse(localStorage.getItem('productArray')); console.log(productArray);//기존 카테고리함수 호출
+        if(productArray==null){
+            productArray=[];    //만약에 localStorage에 아무것도 없으면 배열 선언
+        }
+
 const plist=document.querySelector("#plist");
 let selectCno=document.querySelector('#selectCno').value;
 console.log(selectCno);
 
 let html=``;
-let x=0;
 
 for(let i=0; i<productArray.length; i++){
         if(productArray[i].cno==selectCno){   //선택된 카테고리 항목을 출력
@@ -218,6 +264,11 @@ plist.innerHTML=html;
 //===========제품리스트 수정=============
     //제품수정 폼 출력 함수
 function changeProduct(changePno){  console.log(`제품수정 폼 출력 함수 실행`);
+    let productArray = JSON.parse(localStorage.getItem('productArray')); console.log(productArray);//기존 제품함수 호출
+                if(productArray==null){
+                    productArray=[];    //만약에 localStorage에 아무것도 없으면 배열 선언
+                }
+
     const changeTable=document.querySelector(`#rewordProduct[value='${changePno}']`);
     let changePname=``;
     let changePprice=``;
@@ -246,9 +297,27 @@ function changeProduct(changePno){  console.log(`제품수정 폼 출력 함수 
 
     //제품수정>확인 클릭
 function changePermit(changePno){   console.log(`제품수정 확인클릭 실행`);
+    let productArray = JSON.parse(localStorage.getItem('productArray')); console.log(productArray);//기존 제품함수 호출
+                if(productArray==null){
+                    productArray=[];    //만약에 localStorage에 아무것도 없으면 배열 선언
+                }
+
     const changePname=document.querySelector('#changePname').value;
     const changePprice=document.querySelector('#changePprice').value;
-    const changePimg=document.querySelector('#changePimg').value;
+    let changePimg=document.querySelector('#changePimg').value;
+
+    //만약 수정시에 제품이미지를 선택하지 않았을 경우 원래 이미지 넣기
+    if(changePimg==''){
+        for(let j=0; j<productArray.length; j++){
+            if(changePno==productArray[j].pno){
+                changePimg=productArray[j].pimg;
+            }
+        }
+    }
+
+    //확인
+    let check=confirm('수정하시겠습니까?');
+    if(check==false){ return; }
 
     for(let i=0; i<productArray.length; i++){   //작성한 정보로 수정하기
         if(productArray[i].pno==changePno){
@@ -258,6 +327,8 @@ function changePermit(changePno){   console.log(`제품수정 확인클릭 실�
         }
     }
 
+    localStorage.setItem('productArray',JSON.stringify(productArray));//localstorage에 함수 재등록
+
     printPlist()    //리스트 재출력
 }
 
@@ -266,15 +337,17 @@ function changeCancel(changePno){   console.log(`제품수정 취소클릭 실�
     printPlist();
 }
 
-
-
-
 //===========제품리스트 수정 end=============
 
 
 //===========제품 삭제=============
     //제품 삭제 함수
 function deleteProduct(deletePno){  console.log(`제품 삭제 함수 실행`);
+    let productArray = JSON.parse(localStorage.getItem('productArray')); console.log(productArray);//기존 제품함수 호출
+            if(productArray==null){
+                productArray=[];    //만약에 localStorage에 아무것도 없으면 배열 선언
+            }
+
     
     let check=confirm('제품을 삭제하시겠습니까?');
     if(check==false){
@@ -286,12 +359,23 @@ function deleteProduct(deletePno){  console.log(`제품 삭제 함수 실행`);
             productArray.splice(i,1);
         }
     }
+
+    localStorage.setItem('productArray',JSON.stringify(productArray));//localstorage에 함수 재등록
     
     printPlist()
 }//f end
 
     //카테고리 삭제
 function deleteCategory(selectCno){ console.log(`카테고리 삭제함수 실행`);
+    let categoryArray = JSON.parse(localStorage.getItem('categoryArray')); console.log(categoryArray);//기존 카테고리함수 호출
+        if(categoryArray==null){
+            categoryArray=[];    //만약에 localStorage에 아무것도 없으면 배열 선언
+        }
+
+    let productArray = JSON.parse(localStorage.getItem('productArray')); console.log(productArray);//기존 제품함수 호출
+        if(productArray==null){
+            productArray=[];    //만약에 localStorage에 아무것도 없으면 배열 선언
+        }
 
     let check=confirm('카테고리를 삭제하시겠습니까?');
         if(check==false){
@@ -310,6 +394,8 @@ function deleteCategory(selectCno){ console.log(`카테고리 삭제함수 실�
             categoryArray.splice(i,1);
         }
     }
+
+    localStorage.setItem('categoryArray',JSON.stringify(categoryArray));//localstorage에 함수 재등록
 
     //카테고리 출력
     inputSelect(`selectCategory`);
