@@ -41,20 +41,28 @@ const productArray=[
     {pno:32,  cno:4, pname:'음료(유산균)', pimg:'/img/사이드음료_음료(유산균).png', pprice:1000}
 ]
 // ========================== 카트 리스트 ========================== //
-let cartArray=[];
+let JScartArray=[];
 
-// ========================== 로컬스토리지 등록 ========================== //
+// ========================== !!!!! 로컬스토리지 등록 !!!!! ========================== //
 localStorage.setItem('categoryArray',JSON.stringify(categoryArray));
 localStorage.setItem('productArray',JSON.stringify(productArray));
-// ========================== 등록 및 출력 ========================== //
 
+// ========================== 등록 및 출력 ========================== //
+document.addEventListener('DOMContentLoaded',function(){
+    categoryPrint(1);
+    cartPrint();
+})
     // =========================== 카테고리 출력 =========================== //
-    categoryPrint(1)
     function categoryPrint(selectCno){
         const bottomHeader=document.querySelector('#bottomHeader>ul');
         let html='';
-        for(i=0; i<categoryArray.length; i++){
-            html+=`<div id="listMenu"><li onclick="categoryPrint(${categoryArray[i].cno})" class="${categoryArray[i].cno==selectCno?'selectMenu':''}">${categoryArray[i].cname}</li></div>`
+        for(let i=0; i<categoryArray.length; i++){
+            html+=`
+            <div id="listMenu">
+            <li onclick="categoryPrint(${categoryArray[i].cno})" class="${categoryArray[i].cno==selectCno?'selectMenu':''}">
+            ${categoryArray[i].cname}
+            </li>
+            </div>`
         }
         bottomHeader.innerHTML=html;
         productPrint(selectCno)
@@ -64,7 +72,7 @@ localStorage.setItem('productArray',JSON.stringify(productArray));
     function productPrint(selectCno){
         const main=document.querySelector('#main');
         let html='';
-        for(i=0; i<productArray.length; i++){
+        for(let i=0; i<productArray.length; i++){
             if(productArray[i].cno==selectCno){
                 html += `<div id="product" onclick="setCart(${productArray[i].pno})">
                             <div id="pimg"><img src="${productArray[i].pimg}"></div>
@@ -78,41 +86,94 @@ localStorage.setItem('productArray',JSON.stringify(productArray));
     }
 
     // ========================== 카트배열에 등록 ========================== //
-    function setCart(selectCno){
-        cartArray.push(selectCno); console.log(cartArray);
-        cartPrint()
-        //totalPrice()
+    function setCart(event){ // 언제 상품을 클릭했을때 무엇을 상품의 pno와 수량을 어디에 로컬스토리지에 새 배열로 등록
+            console.log(event);
+        let cartArray=JSON.parse(localStorage.getItem('cartArray'));
+        if(cartArray==null){cartArray=[]};  // ?????????????????????????
+        // 객체화
+        const product=
+        {
+            pno:event,
+            count:1
+        }
+        cartArray.push(product);
+        JScartArray.push(product);
+        console.log(JScartArray)
+        console.log(cartArray);
+    // ========================== !!!!! 로컬스토리지 등록 !!!!! ========================== //
+        localStorage.setItem('cartArray',JSON.stringify(cartArray));
+        cartPrint(event)
     }
     // ========================== 카트 출력 ========================== //
     function cartPrint(){
-        const footer=document.querySelector('#footerBottom');
+        const footerBottom=document.querySelector('#footerBottom');
+        let productArray=JSON.parse(localStorage.getItem('productArray'));
+        let totalPrice=0;
         let html='';
-        for(let i=0; i<cartArray.length; i++){
-            for(j=0; j<productArray.length; j++){
-                if(cartArray[i]==productArray[j].pno){
-                html +=
-                    `<div>${productArray[j].pname}</div>
+        for(let i=0; i<JScartArray.length; i++){
+            for(let j=0; j<productArray.length; j++){
+                if(JScartArray[i].pno==productArray[j].pno){
+                html+=`
+                <div>
+                    <div>${productArray[j].pname}</div>
                     <div>
-                        <span onclick="add()" id="connect"> < </span>
-                        <p id="count">${productCount}
-                        <span id="disconnect"> > </span>
+                        <span onclick=deleteCount(${i})> < </span>
+                        <span id="productCount"> ${JScartArray[i].count} </span>
+                        <span onclick=addCount(${i})> > </span>
                     </div>
-                    <div>${productArray[j].pprice.toLocaleString()}</div>`
-                }      
-            }
-        }
-        footer.innerHTML=html;
-        // document.querySelector('#cartCount').innerHTML=cartCount;
-        //document.querySelector('#totalPrice').innerHTML=totalPrice.toLocaleString()+"원";
+                    <div>${productArray[j].pprice*JScartArray[i].count.toLocaleString()}원</div>
+                </div>
+                `
+                totalPrice += productArray[j].pprice*JScartArray[i].count;
+                } //    if end
+            } // for 2 end
+        } // for 1 end
+        footerBottom.innerHTML=html;
+        document.querySelector("#cartInfo").innerHTML="총 가격:"+totalPrice.toLocaleString()+"원";
     }
-    // ========================== 상품개수 수량변경 함수 ========================== //   
-    let productCount=0;
-    const connect=document.querySelector('#connect');
-    const disconnect=document.querySelector('#disconnect');
-    const pcount=document.querySelector('#count');
-    function add(){
-        productCount++; console.log(productCount);
+
+    // ========================== 상품개수 수량변경 함수 ========================== //
+    function addCount(index){   // 언제 화살표를 클릭했을때 무엇을 카트어레이 카운트를 ++
+        let cartArray=JSON.parse(localStorage.getItem('cartArray')); console.log(cartArray)
+        cartArray[index].count += 1;
+        JScartArray[index].count += 1;
+        localStorage.setItem('cartArray',JSON.stringify(cartArray));
+        cartPrint();
     }
-    // ========================== 상품 총 가격 ========================== //
-/*     const totalPrice=document.querySelector('#totalPrice')
-    <div>${totalPrice += productArray[j].pprice}</div> */
+    function deleteCount(index){
+        let cartArray=JSON.parse(localStorage.getItem('cartArray'));
+        cartArray[index].count -= 1;
+        localStorage.setItem('cartArray',JSON.stringify(cartArray));
+        cartPrint()
+    }
+
+    // ========================== 관리자탭 페이지 전환 ========================== //
+/*     function adminTab(){
+        location href=""
+    } */
+
+    // ========================== 주문하기 누를 시 주문내역 배열저장 ========================== //
+    /*
+        언제 주문하기를 눌렀을때
+        무엇을 카트에 있는 전체 내역을
+            cartArray에는 pno와 카운트
+        어디에 새로운 orderArray 배열에
+    */
+        function mainOrder(){
+            html='';
+            let footerBottom=document.querySelector('#footerBottom');
+            let cartInfo=document.querySelector('#cartInfo');
+            JScartArray.splice(0);
+            footerBottom.innerHTML=html;
+            cartInfo.innerHTML=html;
+    }
+
+    // ========================== 취소하기 누를 시 올 삭제 ========================== //
+    function deleteAll(){
+        let cartArray=JSON.parse(localStorage.getItem('cartArray'));
+            cartArray.splice(0);
+            JScartArray.splice(0);
+        localStorage.setItem('cartArray',JSON.stringify(cartArray))
+            console.log(cartArray);
+        cartPrint()
+    }

@@ -6,6 +6,7 @@
     <title>Page Title</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link rel='stylesheet' type='text/css' media='screen' href='/css/main.css'>
+    <script src='/main.js'></script>
 </head>
 <body>
     <div id="wrap">
@@ -13,21 +14,22 @@
             <div id="topHeader">
                 <div class="topImg"><img style="width: 50px;" src="img/메인페이지_매장식사.png"></div>
                 <div class="topTitle"><span>매장식사</span></div>
+                <div onclick="adminTab()" class="admin">관리자</div>
             </div>
             <div id="bottomHeader">
                 <ul>
-<!--                <div id="listMenu"><li class="selectMenu">메인메뉴</li></div>
+                    <div id="listMenu"><li class="selectMenu">메인메뉴</li></div>
                     <div id="listMenu"><li>닭발메뉴</li></div>
                     <div id="listMenu"><li>세트메뉴</li></div>
-                    <div id="listMenu"><li>사이드/음료</li></div> -->
+                    <div id="listMenu"><li>사이드/음료</li></div>
                 </ul>
             </div>
         </div>
         <div id="main">
             <div id="product">
-<!--            <div id="pimg"><img src=""></div>
+                <div id="pimg"><img src=""></div>
                 <div id="ppname"></div>
-                <div id="pprice"></div> -->
+                <div id="pprice"></div>
             </div>
         </div>
         <div id="footer">
@@ -36,10 +38,24 @@
                 <div>수량</div>
                 <div>가격</div>
            </div>
-           <div id="footerBottom"></div>
-           <div id="totalPrice"></div>
+           <div id="footerBottom">
+                <div>엽기메뉴</div>
+                <div>
+                    <span> < </span>
+                    <span> 2 </span>
+                    <span> > </span>
+                </div>
+                <div> 14,000원 </div>
+           </div>
+           <div id="cartInfo">
+
+           </div>
+           <div id="orderBtn">
+            <div onclick="deleteAll()" id="cancle">취소하기</div>
+            <div onclick="mainOrder()" id="order">주문하기</div>
+           </div>
         </div>
     </div>
-    <script src='/main.js'></script>
+    
 </body>
 </html>
