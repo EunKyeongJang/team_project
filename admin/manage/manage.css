@@ -32,6 +32,15 @@ img{
     margin: 0 5px;
     padding: 5px;
 }
+.listHead{
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #a5a4a4;     
+    font-size: 11px; 
+    font-weight: bold;
+    text-align: center;
+    padding: 3px 0;
+}
 
 /* 카테고리 등록 */
 #categorySection>h3{
@@ -56,30 +65,6 @@ img{
     justify-content: space-around;
     margin: 10px 0;
 }
-#categoryList .colwidthA{
-    width: 70px;
-}
-#categoryList .colwidthB{
-    width: 180px;
-}
-#categoryList .colwidthC{
-    width: 25px;
-}
-#categoryList th{
-    background-color: #c7c6c6;
-}
-#categoryList{
-    margin: 0 auto;
-    font-size: 11px;  
-}
-#categoryList, #categoryList th, #categoryList td{    
-    border: 1px solid rgb(145, 145, 145);
-    border-collapse: collapse;
-    height: 25px;
-}
-#categoryList td{
-    text-align: center;
-}
 #categoryList button{
     border: none;
     width: 15px;
@@ -89,6 +74,36 @@ img{
     width: 35px;
 }
 
+    /* category head */
+#categoryHeader{
+    width: 250px; 
+    margin: 0 auto;
+}
+.CheadA{
+    display: block;
+    width: 70px;
+}
+.CheadB{
+    display: block;
+    width: 120px;
+}
+.CheadC{
+    display: block;
+    width: 30px;
+}
+.Clist{
+    display: flex;    
+    justify-content: space-between;
+    width: 250px; 
+    margin: 0 auto;
+    text-align: center;
+    font-size: 11px;
+    padding: 5px 0;
+    border-top: 1px solid #a5a4a4;
+}
+.Clist>.CheadC>button{
+    font-size: 11px;
+}
 /* 제품등록 */
 #productSection{
     width: 600px;
@@ -126,7 +141,7 @@ img{
 }
 #writeProduct{
     display: flex;
-    margin: 10px 0;
+    margin: 10px 5px;
     justify-content: space-around;
 }
 #writeProduct>#inputPno{
@@ -137,11 +152,7 @@ img{
     border: none;
 }
 
-/* 제품 리스트 */
-#pListSection th, td>input, #plist{
-    font-size: 11px;
-    text-align: center;
-}
+
 #changePno{
     width: 60px;
     margin: 5px;
@@ -154,28 +165,47 @@ img{
     margin: 5px;
     width: 150px;
 }
-#pListSection{
-    width: 500px;
+
+/* product header */
+#productHeader{
+    width: 570px;
     margin: 0 auto;
 }
-#rewordProduct{
-    height: 50px;
+#productHeader>span{
+    display: block;
 }
-#pListSection, #pListSection th, #pListSection td{    
-    border: 1px solid rgb(145, 145, 145);
-    border-collapse: collapse;
-    height: 25px;
+.productList>span{
+    display: block;
 }
-#pListSection th{
-    background-color: #c7c6c6;
+.productList{
+    border-top: 1px solid #a5a4a4;
 }
-#plist>tr .a{
+.PheadA{
+    width: 70px;
+}
+.PheadB, .PheadC{
+    width: 120px;
+}
+.PheadD{
+    width: 150px;
+}
+.PheadE{
+    width: 100px;
+}
+
+/* 제품리스트&수정폼 */
+.productList, .newPList{
+    width: 570px;
     display: flex;
-    border: none;
+    text-align: center;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0 auto;
+    font-size: 11px;
 }
-#plist>tr .a>input{
-    width: 30px;
-    height: 20px;
-    margin: 5px;
-    margin-top: 41px;
+.productList input,.newPList input{
+    font-size: 11px;
+}
+.newPList{
+    box-shadow: 1px 1px 1px 1px #a5a4a4 inset;
 }

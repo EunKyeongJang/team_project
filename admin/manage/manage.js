@@ -29,6 +29,7 @@ let orderArray=[
 
 //========카테고리 등록===========
 inputSelect(`selectCategory`);//제품등록 selct category
+printCategory() //카테고리 리스트 출력
 
     //카테고리 등록함수
 function inputCategory(){   console.log(`카테고리 등록함수 실행`);
@@ -48,6 +49,22 @@ function inputCategory(){   console.log(`카테고리 등록함수 실행`);
 
     inputSelect(`selectCategory`);
 }//f end
+
+    //카테고리 리스트 출력
+function printCategory(){  console.log('카테고리 리스트 출력함수 실행');
+    const cOutput=document.querySelector('#cOutput');
+    let html=``;
+
+    for(let i=0; i<categoryArray.length; i++){
+        html+=`<div class="Clist">
+            <span class="CheadA">${categoryArray[i].cno}</span>
+            <span class="CheadB">${categoryArray[i].cname}</span>
+            <span class="CheadC"><button onclick="deleteCategory(${categoryArray[i].cno})" type="button">X</button></span>
+        </div>`;
+    }
+    
+    cOutput.innerHTML=html;
+}
 
     //등록된 카테고리 select에 추가
 function inputSelect(selectId){     console.log(`select에 추가함수 실행`);
@@ -112,6 +129,26 @@ function inputProduct(){    console.log(`제품등록함수 실행`);
     for(let z=0; z<productArray.length; z++){
         if(inputPno==productArray[z].pno){ alert('존재하는 제품번호입니다.'); return;}
     }
+    if(selectCno==``){  //카테고리 유효성
+        alert('카테고리를 선택해 주십시오.');
+        return;
+    }
+    if(inputPname==``){  //제품명 유효성
+        alert('제품명을 입력해 주십시오.');
+        return;
+    }
+    if(inputPno==``){  //제품번호 유효성
+        alert('제품번호을 입력해 주십시오.');
+        return;
+    }
+    if(inputPimg==``){  //이미지 유효성
+        alert('이미지를 선택해 주십시오.');
+        return;
+    }
+    if(inputPrice==``){  //가격 유효성
+        alert('가격을 입력해 주십시오.');
+        return;
+    }
 
     //이미지는 inputImg 함수로 변환하여 사용(경로 -> byte) 사용
 
@@ -150,28 +187,26 @@ let html=``;
 let x=0;
 
 for(let i=0; i<productArray.length; i++){
-        if(productArray[i].cno==selectCno){   //선택된 버튼에 따라 카테고리별로 출력할지, 모든제품을 출력할지
-            x++;
+        if(productArray[i].cno==selectCno){   //선택된 카테고리 항목을 출력
             html+=`<!-- 제품 1개 -->
-                <tr>
-                    <td>${productArray[i].pno}</td>
-                    <td>${productArray[i].pname}</td>
-                    <td>${productArray[i].pprice}</td>
-                    <td><img src='img/${productArray[i].pimg}' /></td>
-                    <td><input onclick="changeProduct(${productArray[i].pno})" type="button" value="수정"></td>
-                    <td><input onclick="deleteProduct(${productArray[i].pno})" type="button" value="삭제"></td>
-                </tr>
-                <tr value="${productArray[i].pno}">
-                </tr>
+                <div class="productList">
+                    <span class="PheadA">${productArray[i].pno}</span>
+                    <span class="PheadB">${productArray[i].pname}</span>
+                    <span class="PheadC" >${productArray[i].pprice}</span>
+                    <span class="PheadD"><img src='${productArray[i].pimg}' /></span>
+                    <span class="PheadE">
+                        <input onclick="changeProduct(${productArray[i].pno})" type="button" value="수정">
+                        <input onclick="deleteProduct(${productArray[i].pno})" type="button" value="삭제">
+                    </span>
+                </div>
+
+                <!-- 제품수정 테이블-->
+                <div id="rewordProduct" value="${productArray[i].pno}">
+                </div>
                 <!-- 제품 1개 end -->`;
         }
     }
 
-if(x==0){   //만약 카테고리에 출력되는 제품이 없다면 '카테고리 삭제' 버튼 생성
-    html+=`<tr>
-        <td><input onclick="deleteCategory(${selectCno})" type="button" value="카테고리삭제"></td>
-        </tr>`;
-}
 console.log(productArray);
 
 plist.innerHTML=html;
@@ -183,7 +218,7 @@ plist.innerHTML=html;
 //===========제품리스트 수정=============
     //제품수정 폼 출력 함수
 function changeProduct(changePno){  console.log(`제품수정 폼 출력 함수 실행`);
-    const changeTable=document.querySelector(`tr[value='${changePno}']`);
+    const changeTable=document.querySelector(`#rewordProduct[value='${changePno}']`);
     let changePname=``;
     let changePprice=``;
 
@@ -194,12 +229,16 @@ function changeProduct(changePno){  console.log(`제품수정 폼 출력 함수 
         }
     }
     //제품수정 폼
-    let html=`<td> <input id="changePno" type="text" placeholder="${changePno}" disabled/>  </td>
-            <td> <input id="changePname" type="text" placeholder="${changePname}"/> </td>
-            <td> <input id="changePprice" type="text" placeholder="${changePprice}"/> </td>
-            <td> <input id="changePimg" type="file"> </td>
-            <td><input onclick="changePermit(${changePno})" type="button" value="확인"></td>
-            <td><input onclick="changeCancel(${changePno})" type="button" value="취소"></td>`;
+    let html=`<div class="newPList">      
+            <span> <input id="changePno" class="PheadA" type="text" value="${changePno}" disabled/>  </span>
+            <span> <input id="changePname" class="PheadB" type="text" value="${changePname}"/> </span>
+            <span> <input id="changePprice" class="PheadC" type="text" value="${changePprice}"/> </span>
+            <span> <input id="changePimg" class="PheadD" type="file"> </span>
+            <span class="PheadE">
+                <input onclick="changePermit(${changePno})" type="button" value="확인">
+                <input onclick="changeCancel(${changePno})" type="button" value="취소">
+            </span>  
+        </div> `;
 
     changeTable.innerHTML=html;  //수정테이블 아래에 띄우기
 
@@ -254,9 +293,16 @@ function deleteProduct(deletePno){  console.log(`제품 삭제 함수 실행`);
     //카테고리 삭제
 function deleteCategory(selectCno){ console.log(`카테고리 삭제함수 실행`);
 
-let check=confirm('카테고리를 삭제하시겠습니까?');
-    if(check==false){
-        return;
+    let check=confirm('카테고리를 삭제하시겠습니까?');
+        if(check==false){
+            return;
+        }
+
+    for(let j=0; j<productArray.length; j++){
+        if(selectCno==productArray[j].cno){
+            alert('카테고래 내 제품을 모두 삭제하고 다시 시도 해주십시오.');
+            return;
+        }
     }
 
     for(let i=0; i<categoryArray.length; i++){
@@ -268,6 +314,7 @@ let check=confirm('카테고리를 삭제하시겠습니까?');
     //카테고리 출력
     inputSelect(`selectCategory`);
     printPlist();
+    printCategory();
 
     console.log(categoryArray);
 }
