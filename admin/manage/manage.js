@@ -80,6 +80,25 @@ function printCno(selectValue, outputId){   console.log('카테고리 번호 출
     }
 }//f end
 
+//@@이미지 등록 함수(경로 -> byte)
+let imgByte=``;
+function inputImg(event){console.log('inputImg()함수 실행')
+    //!event : 이벤트를 발생한 결과정보객체
+
+    //[1]첨부파일 input에 등록된 파일을 바이트 가ㅏ져오기
+        //1. 파일 읽기 클래서[객체,설계도],newFileReader();
+    let readFile= new FileReader(); //파일 읽기 생성
+        //2. 파일을 JS로 읽어들이기[ 내가 등록한 파일을 ]
+        readFile.readAsDataURL(event.target.files[0]);
+        console.log(readFile);
+        //3. 읽어온 바이트를 img 태그에 출력
+        readFile.onload=function(){
+            imgByte=readFile.result;
+        }
+
+}
+//@@이미지 등록 함수 end
+
     //제품등록 함수
 function inputProduct(){    console.log(`제품등록함수 실행`);
     //새로운 제품 정보 받아오기
@@ -94,16 +113,14 @@ function inputProduct(){    console.log(`제품등록함수 실행`);
         if(inputPno==productArray[z].pno){ alert('존재하는 제품번호입니다.'); return;}
     }
 
-    //이미지 경로 가공(절대경로 : 오류발생, 상대경로로 바꾸기)
-    let newImg=inputPimg.split('\\')[2];
-    console.log(inputPimg.split('\\')[2]);
+    //이미지는 inputImg 함수로 변환하여 사용(경로 -> byte) 사용
 
      //제품 등록
      productArray.push({
         pno : inputPno, 
         pname : inputPname, 
         pprice :inputPrice, 
-        pimg : newImg, 
+        pimg : imgByte, 
         cno :  selectCno
     })
     console.log(productArray);
@@ -140,7 +157,7 @@ for(let i=0; i<productArray.length; i++){
                     <td>${productArray[i].pno}</td>
                     <td>${productArray[i].pname}</td>
                     <td>${productArray[i].pprice}</td>
-                    <td>${productArray[i].pimg}</td>
+                    <td><img src='img/${productArray[i].pimg}' /></td>
                     <td><input onclick="changeProduct(${productArray[i].pno})" type="button" value="수정"></td>
                     <td><input onclick="deleteProduct(${productArray[i].pno})" type="button" value="삭제"></td>
                 </tr>
@@ -155,6 +172,7 @@ if(x==0){   //만약 카테고리에 출력되는 제품이 없다면 '카테고
         <td><input onclick="deleteCategory(${selectCno})" type="button" value="카테고리삭제"></td>
         </tr>`;
 }
+console.log(productArray);
 
 plist.innerHTML=html;
 }
@@ -219,6 +237,11 @@ function changeCancel(changePno){   console.log(`제품수정 취소클릭 실�
     //제품 삭제 함수
 function deleteProduct(deletePno){  console.log(`제품 삭제 함수 실행`);
     
+    let check=confirm('제품을 삭제하시겠습니까?');
+    if(check==false){
+        return;
+    }
+
     for(let i=0; i<productArray.length; i++){
         if(productArray[i].pno==deletePno){
             productArray.splice(i,1);
@@ -230,6 +253,11 @@ function deleteProduct(deletePno){  console.log(`제품 삭제 함수 실행`);
 
     //카테고리 삭제
 function deleteCategory(selectCno){ console.log(`카테고리 삭제함수 실행`);
+
+let check=confirm('카테고리를 삭제하시겠습니까?');
+    if(check==false){
+        return;
+    }
 
     for(let i=0; i<categoryArray.length; i++){
         if(selectCno==categoryArray[i].cno){
@@ -244,5 +272,7 @@ function deleteCategory(selectCno){ console.log(`카테고리 삭제함수 실�
     console.log(categoryArray);
 }
 //===========제품리스트 삭제 end=============
+
+
 
 //===================제품리스트 수정/삭제 end======================

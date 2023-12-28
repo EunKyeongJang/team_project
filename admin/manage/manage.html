@@ -10,70 +10,144 @@
 </head>
 <body>
 
-     <!-- ==============관리자메뉴=============== -->
-     <div>
-      <h3>관리자 메뉴</h3>
+    
+    <!-- ==============관리자메뉴=============== -->
+    <div id="manage">
+        <h3>제품 관리</h3>
 
-      <!-- 카테고리 등록 -->
-      <div> 
-          <h3>카테고리 등록</h3>
-          <input id="inputCnum" type="text" placeholder="카테고리 고유번호"/>             
-          <input id="inputCname" type="text" placeholder="카테고리 명"/>             
-          <input onclick="inputCategory()" type="button" value="등록">
-      </div>
-      <!-- 카테고리 등록 end -->
+        <!-- main start -->
+        <div id="manageMain">
+            <!-- 카테고리 등록 -->
+            <div id="categorySection">                
+                <h3 class="header">카테고리 등록</h3>
 
-      <!-- 제품등록 -->
-      <div>
-          <h3>제품등록</h3>
+                <div id="categoryBox">
+                    <input id="inputCnum" type="text" placeholder="카테고리 고유번호"/>             
+                    <input id="inputCname" type="text" placeholder="카테고리 명"/>             
+                    <input onclick="inputCategory()" type="button" value="등록">
+                </div>
 
-          <!-- 등록할 제품의 카테고리 선택 -->
-          <select onclick="printCno(`selectCategory`, `selectCno`)" id="selectCategory">
-              
-          </select>
+                <table id="categoryList">
+                    <tr>
+                        <th class="colwidthA">카테고리번호</th>
+                        <th class="colwidthB">카테고리 명</th>
+                        <th class="colwidthㅊ">비고</th>
+                    </tr>
+                    <!-- list 1개 -->
+                    <tr>
+                        <td>1</td>
+                        <td>메인메뉴</td>
+                        <td><button type="button">X</button></td>
+                    </tr>
 
-          <input id="selectCno" type="text" placeholder="카테고리 고유번호" readonly>
-          <!-- 카테고리 번호 :<span id="selectCno">   </span> -->
-          <!-- 등록할 제품의 카테고리 선택 end -->
-          
-          <!-- 제품 입력 및등록 -->
-          <input id="inputPname" type="text" placeholder="제품 명"/>
-          <input id="inputPno" type="text" placeholder="제품 고유번호"/>             
-          <input id="inputPrice" type="text" placeholder="제품 가격"/>
-          <input id="inputPimg" type="file">
-          <input onclick="inputProduct()" type="button" value="등록">
-          <input onclick="printPlist()" type="button" value="검색" />
-          <!-- 제품 입력 및등록 end -->
+                    <!-- list 1개 end -->
 
-      </div>
-      <!-- 제품등록 end -->
+                    <!-- list 1개 -->
+                    <tr>
+                        <td>1</td>
+                        <td>메인메뉴</td>
+                        <td><button type="button">X</button></td>
+                    </tr>
+                    <!-- list 1개 end -->
+                </table>
+                
+            </div>
+            <!-- 카테고리 등록 end -->
 
-      <!-- 결제내역 -->
-      <div>
-          <!-- 결제내역 테이블 -->
-          <table>
-              <tr>                    
-                  <th>제품 고유번호</th>
-                  <th>제품명</th>
-                  <th>제품가격</th>
-                  <th>제품이미지</th>
-              </tr>
+            <!-- 제품등록 -->
+            <div id="productSection">
+                <h3 class="header">제품등록</h3>
+                
+                <div id="productBox">
+                    <!-- 등록할 제품의 카테고리 선택 -->
+                    <div id="PselectC">
+                        <select onchange="printCno(`selectCategory`, `selectCno`)" id="selectCategory">
+                            
+                        </select>
 
-              <!-- 제품 리스트-->
-              <tbody id="plist">
+                        <span>카테고리 번호 : 
+                            <input id="selectCno" type="text" readonly>
+                        </span> 
+                    </div>
+                    <!-- 등록할 제품의 카테고리 선택 end -->
+                    
+                    <!-- 제품 입력 및등록 -->
+                    <div id="writeProduct">
+                        <input id="inputPname" type="text" placeholder="제품 명"/>
+                        <input id="inputPno" type="text" placeholder="제품 번호"/>             
+                        <input id="inputPrice" type="text" placeholder="제품 가격"/>
+                        <input onchange="inputImg(event)" id="inputPimg" type="file">
+                        <input onclick="inputProduct()" type="button" value="등록">
+                        <input onclick="printPlist()" type="button" value="검색" />
+                    </div>                
+                    <!-- 제품 입력 및등록 end -->
+                </div>
 
-              </tbody>
-              <!-- 제품 리스트 end -->
-              
+                <!-- 제품 수정/삭제 -->
+                <div id="productControl">
+                    <!-- 제품 테이블 -->
+                    <table id="pListSection">
+                        <tr>                    
+                            <th>제품 번호</th>
+                            <th>제품명</th>
+                            <th>제품가격</th>
+                            <th>제품이미지</th>
+                            <th >비고</th>
+                        </tr>
+        
+                        <!-- 제품 리스트-->
+                        <tbody id="plist">
+        
+                            <!-- 제품 1개 -->
+                            <tr>
+                                <td>1</td>
+                                <td>엽떡</td>
+                                <td>17000</td>
+                                <td><img src='img/엽떡.png' /></td>
+                                <td class="a"><input onclick="changeProduct()" type="button" value="수정">
+                                <input onclick="deleteProduct()" type="button" value="삭제"></td>
+                            </tr>
+                            <tr id="rewordProduct" value="1">       
+                                <td> <input id="changePno" type="text" disabled/>  </td>
+                                <td> <input id="changePname" type="text" placeholder="수정할 이름"/> </td>
+                                <td> <input id="changePprice" type="text" placeholder="수정할 가격"/> </td>
+                                <td> <input id="changePimg" type="file"> </td>
+                                <td><input onclick="changePermit(${changePno})" type="button" value="확인">
+                                <input onclick="changeCancel(${changePno})" type="button" value="취소"></td>    
+                            </tr>
+                            <!-- 제품 1개 end -->
+        
+                            <!-- 제품 1개 -->
+                            <tr>
+                                <td>1</td>
+                                <td>엽떡</td>
+                                <td>17000</td>
+                                <td><img src='img/엽떡.png' /></td>
+                                <td><input onclick="changeProduct()" type="button" value="수정">
+                                <input onclick="deleteProduct()" type="button" value="삭제"></td>
+                            </tr>
+                            <tr value="1">                </tr>
+                            <!-- 제품 1개 end -->
+        
+                        </tbody>
+                        <!-- 제품 리스트 end -->
+                        
+        
+                    </table>
+                    <!-- 제품 테이블 end -->
+                </div>
+                <!-- 제품 수정/삭제 end -->
 
-          </table>
-          <!-- 결제내역 테이블 end -->
-      </div>
-      <!-- 결제내역 end -->
-  </div>
-  <!-- ==============관리자메뉴 end=============== -->
-
-  <script src='manage.js'></script>
+            </div>
+            <!-- 제품등록 end -->
+        </div>
+        <!-- main end -->
+        
+    </div>
+    <!-- ==============관리자메뉴 end=============== -->
+    
+    <script src='manage.js'></script>
+    
   
 </body>
 </html>

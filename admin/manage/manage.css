@@ -1,0 +1,159 @@
+ *{
+    /* border: 1px solid red; */
+    list-style-type: none;  /* 글머리 제거 */
+    margin: 0;
+    padding: 0; /* 기본여백 제거 */
+    box-sizing: border-box;
+}
+
+
+img{
+    width: 100px;
+}
+#manage{
+    width: 900px;
+    margin: 0 auto;
+}
+#manage>h3{
+    font-size: 30px;
+    text-align: center;
+}
+#manageMain{
+    display: flex;
+    justify-content: space-between;
+}
+
+.header{    
+    font-size: 15px;
+    background-color: rgb(222, 222, 238);
+    border-radius: 5px;
+    text-align: center;
+    margin: 0 auto;
+}
+
+/* 카테고리 등록 */
+#categorySection>h3{
+    width: 300px;
+}
+#categorySection{
+    margin : 20px 0 30px 0;    
+    border-right: 1px solid #e8e8e8;
+}
+
+#categoryBox>input{
+    border: 1px solid #c7c6c6;
+    height: 22px;
+    border-radius: 3px;    
+    font-size: 11px;
+}
+#categoryBox>#inputCnum{
+    width: 100px;
+}
+#categoryBox{
+    display: flex;
+    justify-content: space-around;
+    margin: 10px 0;
+}
+#categoryList .colwidthA{
+    width: 70px;
+}
+#categoryList .colwidthB{
+    width: 180px;
+}
+#categoryList .colwidthC{
+    width: 25px;
+}
+#categoryList th{
+    background-color: #c7c6c6;
+}
+#categoryList{
+    margin: 0 auto;
+    font-size: 11px;  
+}
+#categoryList, #categoryList th, #categoryList td{    
+    border: 1px solid rgb(145, 145, 145);
+    border-collapse: collapse;
+    height: 25px;
+}
+#categoryList td{
+    text-align: center;
+}
+#categoryList button{
+    border: none;
+    width: 15px;
+    box-shadow:  0 0 3px #a5a4a4;
+}
+
+/* 제품등록 */
+#productSection{
+    width: 600px;
+    margin: 20px 0;
+}
+#PselectC{
+    font-size: 11px;
+    display: flex;
+    width: 250px;
+    justify-content: space-between;
+    margin: 0 auto;
+}
+#PselectC>#selectCategory{
+    font-size: 11px;
+    height: 22px;
+    border-radius: 3px;
+}
+#PselectC #selectCno{
+    font-size: 11px;
+    height: 22px;
+    border: 1px solid #c7c6c6;
+    border-radius: 3px;
+    width: 50px;
+}
+#productBox{
+    display: flex;
+    flex-direction: column;
+    margin: 10px 0;  
+}
+#writeProduct>input{
+    font-size: 11px;
+    border: 1px solid #c7c6c6;
+    height: 22px;    
+    border-radius: 3px;
+}
+#writeProduct{
+    display: flex;
+    margin: 10px 0;
+    justify-content: space-around;
+}
+#writeProduct>#inputPno{
+    width: 60px;
+}
+#inputPimg{
+    width: 170px;
+}
+
+/* 제품 리스트 */
+#pListSection th, td>input, #plist{
+    font-size: 11px;
+    text-align: center;
+}
+#changePno{
+    width: 60px;
+}
+#changePname, #changePprice{
+    width: 100px;
+}
+#pListSection{
+    width: 500px;
+    margin: 0 auto;
+}
+#pListSection, #pListSection th, #pListSection td{    
+    border: 1px solid rgb(145, 145, 145);
+    border-collapse: collapse;
+    height: 25px;
+}
+#pListSection th{
+    background-color: #c7c6c6;
+}
+#plist>tr .a>input{
+    width: 300px;
+}
