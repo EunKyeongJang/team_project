@@ -1,6 +1,7 @@
 //매출 스크립트 작성_김병래
 //샘플
 //데이터 불러오기
+
 let info = [
     {pno: 1, count: 1, list: 1, date: "2023. 12. 20.", total: 14000, status: "완료"},
     {pno: 2, count: 1, list: 2, date: "2023. 12. 20.", total: 16000, status: "완료"},
@@ -26,7 +27,6 @@ let info = [
     {pno: 5, count: 1, list: 1, date: "2023. 12. 28.", total: 24000, status: "완료"},
     {pno: 1, count: 2, list: 2, date: "2023. 12. 28.", total: 28000, status: "완료"},
 ]
-
 let data = JSON.parse(localStorage.getItem('orderArray')); console.log(data)  //주문내역
 for(let s=0; s<data.length;s++){
     info.push(data[s]);

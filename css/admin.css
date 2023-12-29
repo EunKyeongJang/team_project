@@ -34,3 +34,11 @@ a{
 #selectBox{
     background-color: aqua;
 }
+
+.admin{ 
+    display: block;
+    color: rgba(217, 217, 217, 0.3); 
+    font-weight: bold; 
+    border-radius: 5px; 
+    font-size: 20px; 
+    text-align: right;}
