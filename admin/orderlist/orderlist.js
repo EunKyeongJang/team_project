@@ -63,7 +63,7 @@ document.addEventListener('DOMContentLoaded',function(){
                                             <option>완료</option>
                                     </select>
                                 </th>
-                                <th>${productArray[j].pprice*orderArray[i].count}</th>
+                                <th>${(productArray[j].pprice*orderArray[i].count).toLocaleString()}</th>
                                 <th>${orderArray[i].count}</th>
                                 
                              </tr>`
