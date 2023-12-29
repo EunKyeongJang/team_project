@@ -92,14 +92,15 @@ document.addEventListener('DOMContentLoaded',function(){
         let cartArray=JSON.parse(localStorage.getItem('cartArray'));
         if(cartArray==null){cartArray=[]};
         
-        let ch = false;                         console.log(ch);
+        let ch = false;                         
         for( let i = 0 ; i<JScartArray.length ; i++){
             if( JScartArray[i].pno == event ){
                 JScartArray[i].count += 1 ;
                 cartArray[i].count += 1;
-                ch = true;                      console.log(ch);
+                ch = true;
             }
         }
+
         if( !ch ){
             // 객체화
             const product=
@@ -110,7 +111,6 @@ document.addEventListener('DOMContentLoaded',function(){
             cartArray.push(product);
             JScartArray.push(product);
         }
-                                                console.log(ch);
     // ========================== !!!!! 로컬스토리지 등록 !!!!! ========================== //
         localStorage.setItem('cartArray',JSON.stringify(cartArray));
         cartPrint(event)

@@ -2,7 +2,7 @@
 //샘플
 //데이터 불러오기
 
-let info = [
+let info = [            //  상품번호, 수량, 주문번호, 날짜, 가격, 상태
     {pno: 1, count: 1, list: 1, date: "2023. 12. 20.", total: 14000, status: "완료"},
     {pno: 2, count: 1, list: 2, date: "2023. 12. 20.", total: 16000, status: "완료"},
     {pno: 3, count: 1, list: 2, date: "2023. 12. 20.", total: 16000, status: "완료"},
@@ -26,12 +26,13 @@ let info = [
     {pno: 4, count: 1, list: 1, date: "2023. 12. 28.", total: 16000, status: "완료"},
     {pno: 5, count: 1, list: 1, date: "2023. 12. 28.", total: 24000, status: "완료"},
     {pno: 1, count: 2, list: 2, date: "2023. 12. 28.", total: 28000, status: "완료"},
+    // 날짜가 같으면 객체의 가격을 더한다 : 총 매출액 
 ]
-let data = JSON.parse(localStorage.getItem('orderArray')); console.log(data)  //주문내역
+let data = JSON.parse(localStorage.getItem('orderArray')); console.log(data)  //주문내역 // 주문내역에서 가져와야 하는 게 날짜 가격
 for(let s=0; s<data.length;s++){
     info.push(data[s]);
 }
-let product = JSON.parse(localStorage.getItem('productArray')); console.log(product) // 제품배열
+let product = JSON.parse(localStorage.getItem('productArray')); console.log(product) // 제품배열 // 제품배열에서 가져와야 하는게 상품 번호와 상품 이름
 //==========================================================================
 매출()
 //출력함수
