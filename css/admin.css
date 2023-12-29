@@ -1,12 +1,28 @@
  /* 관리자페이지 css 작성 */
+ @font-face {
+    font-family: 'seolleimcool-SemiBold';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2312-1@1.1/seolleimcool-SemiBold.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+*{font-family: 'seolleimcool-SemiBold'; box-sizing: border-box;}
+
+a{
+    text-decoration: none;
+    color: black;
+}
+
 #admin{
     width: 900px;
     margin: 0 auto;
 }
 #adminBox{
     display: flex;
+    padding-top: 10px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid rgb(165, 165, 165);
 }
-#adminBox>div{
+#adminBox>a{
     margin-right: 20px;
     padding: 5px;
     width: 100px;
@@ -18,3 +34,11 @@
 #selectBox{
     background-color: aqua;
 }
+
+.admin{ 
+    display: block;
+    color: rgba(217, 217, 217, 0.3); 
+    font-weight: bold; 
+    border-radius: 5px; 
+    font-size: 20px; 
+    text-align: right;}

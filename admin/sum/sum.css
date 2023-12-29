@@ -6,23 +6,31 @@
 }
 *{font-family: 'seolleimcool-SemiBold'; box-sizing: border-box;}
 /* 바디 */
-body{width: 900px;text-align: center;margin: 0 auto;}
+#wrap{width: 900px;text-align: center;margin: 0 auto; }
 /* 전체 */
 #wrap{display: flex ;flex-direction:column;}
 /* 상위 테이블 */
 #salesGraph{
     display: flex ;flex-direction:column;
-    margin: 0 auto; padding: 10px; background-color: #d98859;
-    width: 900px;font-size: 25px;
+    margin: 0 auto; padding: 10px; 
+    width: 900px;font-size: 18px;
+}
+#salesGraph>table>thead th{
+    background-color: #d98859;border: #d9d9d9 1px solid; padding: 0;
 }
 .dateInfo{cursor: pointer;} /* 날짜 마우스 커서 */
-
+#days td, #content td{
+    padding: 0; border: #d9d9d9 1px solid;
+}
+#wrap>h1{
+    font-size: 30px;
+}
 /* 하위 테이블 */
 #date{font-size: 30px;} /* 선택한 날짜 표시 */
-#salesTb thead th{background-color:#d98859 ;margin-bottom:30px; font-size: 25px;} /* 테이블 헤드 */
-#content{background-color: #d9d9d9; font-size: 20px;} /* 테이블 내용 */
+#salesTb thead th{background-color:#d98859 ;margin-bottom:30px; font-size: 18px;padding: 0;} /* 테이블 헤드 */
+#content{ font-size: 20px;padding: 0;} /* 테이블 내용 */
 
 
 
 /* 총계 */
-#totalBox{display: flex; justify-content:center; padding-top: 20px; font-size: 35px;}
+#totalBox{display: flex; justify-content:center; padding-top: 20px; font-size: 20px;}
