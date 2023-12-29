@@ -6,7 +6,7 @@ let info = [
     {pno: 2, count: 1, list: 2, date: "2023. 12. 20.", total: 16000, status: "완료"},
     {pno: 3, count: 1, list: 2, date: "2023. 12. 20.", total: 16000, status: "완료"},
     {pno: 1, count: 1, list: 1, date: "2023. 12. 21.", total: 14000, status: "완료"},
-    {pno: 2, count: 1, list: 1, date: "2023. 12. 21.", total: 16000, status: "완료"},
+    {pno: 27, count: 1, list: 1, date: "2023. 12. 21.", total: 5900, status: "완료"},
     {pno: 3, count: 1, list: 2, date: "2023. 12. 21.", total: 16000, status: "완료"},
     {pno: 4, count: 1, list: 3, date: "2023. 12. 21.", total: 16000, status: "완료"},
     {pno: 1, count: 1, list: 1, date: "2023. 12. 22.", total: 14000, status: "완료"},
@@ -15,9 +15,13 @@ let info = [
     {pno: 1, count: 1, list: 2, date: "2023. 12. 23.", total: 14000, status: "완료"},
     {pno: 2, count: 1, list: 1, date: "2023. 12. 24.", total: 16000, status: "완료"},
     {pno: 1, count: 1, list: 2, date: "2023. 12. 24.", total: 14000, status: "완료"},
-    {pno: 1, count: 1, list: 1, date: "2023. 12. 25.", total: 14000, status: "완료"},
+    {pno: 1, count: 2, list: 1, date: "2023. 12. 25.", total: 28000, status: "완료"},
+    {pno: 2, count: 1, list: 1, date: "2023. 12. 25.", total: 16000, status: "완료"},
     {pno: 3, count: 1, list: 1, date: "2023. 12. 26.", total: 16000, status: "완료"},
+    {pno: 27, count: 2, list: 1, date: "2023. 12. 26.", total: 10800, status: "완료"},
+    {pno: 27, count: 1, list: 2, date: "2023. 12. 26.", total: 5900, status: "완료"},
     {pno: 4, count: 1, list: 1, date: "2023. 12. 27.", total: 16000, status: "완료"},
+    {pno: 1, count: 2, list: 1, date: "2023. 12. 27.", total: 28000, status: "완료"},
     {pno: 4, count: 1, list: 1, date: "2023. 12. 28.", total: 16000, status: "완료"},
     {pno: 5, count: 1, list: 1, date: "2023. 12. 28.", total: 24000, status: "완료"},
     {pno: 1, count: 2, list: 2, date: "2023. 12. 28.", total: 28000, status: "완료"},
@@ -35,7 +39,7 @@ function 매출() {
     // html 위치연결
     const days = document.querySelector('#days');
     // 주문내역 복사
-    
+    console.log(info)
     let info2= [...info];console.log(info2); //일매출 저장할 주문내역 복사본
     // 이름 불러오기
     let info3= [...info];
@@ -60,7 +64,7 @@ function 매출() {
     for (let f = 0; f < info2.length; f++) {
         for (let g = 0; g < info2.length; g++) {
             if (f != g && info2[f].date == info2[g].date) {
-                console.log(info2); info2.splice(g, 1);
+                info2.splice(g, 1);
                 console.log(info2);
             }
         }
