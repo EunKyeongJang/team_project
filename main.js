@@ -113,6 +113,8 @@ document.addEventListener('DOMContentLoaded',function(){
             cartArray.push(product);
             JScartArray.push(product);
         }
+        
+        
 
     // ========================== !!!!! 로컬스토리지 등록 !!!!! ========================== //
         localStorage.setItem('cartArray',JSON.stringify(cartArray));
@@ -183,10 +185,12 @@ document.addEventListener('DOMContentLoaded',function(){
             JScartArray.splice(0);
             footerBottom.innerHTML=html;
             cartInfo.innerHTML=html;
+            order();// cartArray에 주문번호를 추가하고 로컬 orderArray 배열에 저장하는 함수
     }
 
     // ========================== 취소하기 누를 시 로컬스토리지 carArray 올 삭제 ========================== //
     function deleteAll(){
+        
         let cartArray=JSON.parse(localStorage.getItem('cartArray'));
             cartArray.splice(0);
             JScartArray.splice(0);
@@ -194,3 +198,27 @@ document.addEventListener('DOMContentLoaded',function(){
             console.log(cartArray);
         cartPrint()
     }
+
+    //===========================
+    function order(){// 주문하기 버튼 눌렀을 때 실행될 함수
+        let orderArray = JSON.parse(localStorage.getItem('orderArray')); //localStorage에 orderArray 배열 만듦
+        if( orderArray == null ){ orderArray = [] };
+
+        let cartArray = JSON.parse(localStorage.getItem('cartArray')); // 로컬에 있는 카트 배열 불러옴
+        
+        let list = orderArray.length < 1 ?  1 : orderArray[orderArray.length-1].list+1 // order 배열의 길이가 1보다 작으면 1 아니면 마지막 list 번호에 +1
+        for(let i=0; i<cartArray.length;i++){
+            //cartArray 있는 배열의 객체마다 리스트 번호를 추가
+            cartArray[i].list=list
+            let cart=cartArray[i]
+            //객체 개별로 cart에 저장
+          
+            orderArray.push(cart) //order 배열에 추가
+            localStorage.setItem('orderArray',JSON.stringify(orderArray)); // 로컬 배열에도 추가
+        }
+        console.log(orderArray);
+        
+        cartArray=[] // orderArray push가 끝나면 cartArray는 초기화
+        localStorage.setItem('cartArray',JSON.stringify(cartArray)); // 로컬에도 초기화 저장 
+        
+     }

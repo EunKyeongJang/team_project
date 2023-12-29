@@ -36,19 +36,22 @@ function orderlist(){
    
     const orderlist = document.querySelector('tbody') //어디에
     let html=``;
-    //  제품 이름으로 할지 ? 아니면 제품번호로 할지 물어보기
+   
     for(let i=0; i<orderArray.length;i++){ // order 배열에 있는거 다 출력
         for(let j=0; j<productArray.length; j++){ // 제품 배열 반복
             if(orderArray[i].pno==productArray[j].pno){ // order 배열의 pno과 제품 pno 일치 찾기
+                // 만약 객체에 status 값이 있다면 select 값을 그걸로 출력하기
                 html+=` <tr>
                             <th>${orderArray[i].list}</th> 
                             <th>${productArray[j].pname}</th>
                             <th>${new Date().toLocaleDateString()}</th> 
                             <th>
-                            <select name="${orderArray[i].list}:${orderArray[i].pno}" onchange="status(${orderArray[i].list}, ${orderArray[i].pno})">
-                                    <option>대기중</option>
-                                    <option>취소</option>
-                                    <option>완료</option>
+                               <select 
+                                    name="${orderArray[i].list}:${orderArray[i].pno}" 
+                                    onchange="status(${orderArray[i].list}, ${orderArray[i].pno})">
+                                        <option>대기중</option>
+                                        <option>취소</option>
+                                        <option>완료</option>
                                 </select>
                             </th>
                             <th>${productArray[j].pprice*orderArray[i].count}</th>
