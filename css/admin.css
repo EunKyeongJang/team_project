@@ -1,1 +1,19 @@
  /* 관리자페이지 css 작성 */
+#admin{
+    width: 900px;
+    margin: 0 auto;
+}
+#adminBox{
+    display: flex;
+}
+#adminBox>div{
+    margin-right: 20px;
+    padding: 5px;
+    width: 100px;
+    border-radius: 3px;
+    text-align: center;
+    font-weight: bolder;
+}
+#adminBox>div{
+    background-color: rgb(222, 222, 238);
+}
