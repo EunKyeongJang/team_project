@@ -87,23 +87,38 @@ document.addEventListener('DOMContentLoaded',function(){
 
     // ========================== 카트배열에 등록 ========================== //
     function setCart(event){ // 언제 상품을 클릭했을때 무엇을 상품의 pno와 수량을 어디에 로컬스토리지에 새 배열로 등록
+                // 상품을 클릭했을때 만약 배열에 등록되어있는 인덱스번째 상품번호가 같으면 카운트 +1
             console.log(event);
         let cartArray=JSON.parse(localStorage.getItem('cartArray'));
         if(cartArray==null){cartArray=[]};  // ?????????????????????????
-        // 객체화
-        const product=
-        {
-            pno:event,
-            count:1
+        
+        // ch 스위치 기본 false 배열 하나씩 찾아서 만약 카트 배열 pno랑 이벤트랑 같으면 카운트에 플러스 1 하고 스위치 true
+        // 만약 카트 배열 pno랑 이벤트랑 같지 않으면 
+        let ch = false; 
+        for( let i = 0 ; i<JScartArray.length ; i++){
+            if( JScartArray[i].pno == event ){
+                JScartArray[i].count += 1 ;
+                cartArray[i].count += 1;
+                ch = true;
+            }
+        // ch 스위치가 true이면 이벤트를 pno로 카운트는 1로 객체화해서 배열에 푸시
         }
-        cartArray.push(product);
-        JScartArray.push(product);
-        console.log(JScartArray)
-        console.log(cartArray);
+        if( !ch ){
+            // 객체화
+            const product=
+            {
+                pno:event,
+                count:1
+            }
+            cartArray.push(product);
+            JScartArray.push(product);
+        }
+
     // ========================== !!!!! 로컬스토리지 등록 !!!!! ========================== //
         localStorage.setItem('cartArray',JSON.stringify(cartArray));
         cartPrint(event)
     }
+
     // ========================== 카트 출력 ========================== //
     function cartPrint(){
         const footerBottom=document.querySelector('#footerBottom');
@@ -121,11 +136,12 @@ document.addEventListener('DOMContentLoaded',function(){
                         <span id="productCount"> ${JScartArray[i].count} </span>
                         <span onclick=addCount(${i})> > </span>
                     </div>
-                    <div>${productArray[j].pprice*JScartArray[i].count.toLocaleString()}원</div>
+                    <div>${(productArray[j].pprice*JScartArray[i].count).toLocaleString()}원</div>
                 </div>
                 `
                 totalPrice += productArray[j].pprice*JScartArray[i].count;
                 } //    if end
+                
             } // for 2 end
         } // for 1 end
         footerBottom.innerHTML=html;
@@ -143,6 +159,7 @@ document.addEventListener('DOMContentLoaded',function(){
     function deleteCount(index){
         let cartArray=JSON.parse(localStorage.getItem('cartArray'));
         cartArray[index].count -= 1;
+        JScartArray[index].count -= 1;
         localStorage.setItem('cartArray',JSON.stringify(cartArray));
         cartPrint()
     }
@@ -168,7 +185,7 @@ document.addEventListener('DOMContentLoaded',function(){
             cartInfo.innerHTML=html;
     }
 
-    // ========================== 취소하기 누를 시 올 삭제 ========================== //
+    // ========================== 취소하기 누를 시 로컬스토리지 carArray 올 삭제 ========================== //
     function deleteAll(){
         let cartArray=JSON.parse(localStorage.getItem('cartArray'));
             cartArray.splice(0);
