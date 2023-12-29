@@ -5,6 +5,11 @@
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <title>Page Title</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
+
+    <link rel='stylesheet' type='text/css' media='screen' href='/css/admin.css'>
+
+    <script src="https://code.jquery.com/jquery-latest.min.js"></script> <!-- 최신 jquery -->
+    <script src='/admin/common.js'></script>
     <script src='orderlist.js'></script>
     <style>
         #wrap{
@@ -12,7 +17,7 @@
             margin: 0 auto;
             text-align: center;
         }
-        thead{width: 800px; margin: 0 auto;}
+        table{width: 800px; margin: 0 auto;}
         thead{background-color: rgb(188, 145, 245);}
     
         h3{padding: 20px;}
@@ -20,6 +25,7 @@
    
 </head>
 <body>
+    <div id="header"></div>
     <div id="wrap">
         <input  onclick="order()" type="button" value="주문하기">
         <h3>주문내역</h3>
