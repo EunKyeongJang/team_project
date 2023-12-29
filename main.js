@@ -165,9 +165,9 @@ document.addEventListener('DOMContentLoaded',function(){
     }
 
     // ========================== 관리자탭 페이지 전환 ========================== //
-/*     function adminTab(){
-        location href=""
-    } */
+        function adminTab(){
+            location.href="/admin/orderlist/orderlist.html"
+        }
 
     // ========================== 주문하기 누를 시 주문내역 배열저장 ========================== //
     /*
