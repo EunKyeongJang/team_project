@@ -29,6 +29,8 @@ a{
     border-radius: 3px;
     text-align: center;
     font-weight: bolder;
-    background-color: rgb(222, 222, 238);
-    box-shadow: 1px 1px 1px #9b9b9b;
+}
+
+#selectBox{
+    background-color: aqua;
 }
