@@ -1,7 +1,7 @@
 //주문내역 스크립트 작성_김민지
 
 /*      
-        카트     :[{메뉴번호,개수}]
+        카트     :[{메뉴번호,개수},{메뉴번호,개수},{메뉴번호,개수}]
         주문내역 :[{주문번호,메뉴번호,주문날짜,주문상태, 총가격, 개수}]
 */
 
@@ -11,17 +11,11 @@ if( orderArray == null ){ orderArray = [] };
 //--------[함수1] 카트 배열에서 주문배열로 키:값 추가 저장--------------------// 메인 js로 보낼지 말지...?
 function order(){// 주문하기 버튼 눌렀을 때 실행될 함수
     let cartArray = JSON.parse(localStorage.getItem('cartArray')); // 로컬에 있는 카트 배열 불러옴
-    let productArray = JSON.parse(localStorage.getItem('productArray')); //로컬에서 불러오기
+    
     let list = orderArray.length < 1 ?  1 : orderArray[orderArray.length-1].list+1 // order 배열의 길이가 1보다 작으면 1 아니면 마지막 list 번호에 +1
     for(let i=0; i<cartArray.length;i++){
         //cartArray 있는 배열의 객체마다 리스트 번호를 추가
-        for(let j=0; j<productArray.length;j++){
-            if(cartArray[i].pno==productArray[j].pno){
-                cartArray[i].list=list
-                cartArray[i].date=new Date().toLocaleDateString()
-                cartArray[i].total=productArray[j].pprice*orderArray[i].count
-            }
-        }
+        cartArray[i].list=list
         let cart=cartArray[i]
         //객체 개별로 cart에 저장
       
@@ -51,16 +45,21 @@ function orderlist(){
                             <th>${productArray[j].pname}</th>
                             <th>${new Date().toLocaleDateString()}</th> 
                             <th>
-                                <select id="select" onclick="status(${orderArray[i]})">
-                                    <option>결제완료</option>
-                                    <option>조리중</option>
-                                    <option>픽업완료</option>
+                            <select name="${orderArray[i].list}:${orderArray[i].pno}" onchange="status(${orderArray[i].list}, ${orderArray[i].pno})">
+                                    <option>대기중</option>
+                                    <option>취소</option>
+                                    <option>완료</option>
                                 </select>
                             </th>
-                            <th>${orderArray[i].total}</th>
+                            <th>${productArray[j].pprice*orderArray[i].count}</th>
                             <th>${orderArray[i].count}</th>
+                            
                          </tr>`
-               
+
+                orderArray[i].date=new Date().toLocaleDateString()
+                orderArray[i].total=productArray[j].pprice*orderArray[i].count
+                localStorage.setItem('orderArray',JSON.stringify(orderArray)); // 로컬 배열에도 추가
+                console.log(j)
             }
         }
     }
@@ -68,15 +67,32 @@ function orderlist(){
 }
 
 // -----------[함수3] 상태 저장 후 배열 객체에 넣기------------------
-function status(){
-   
-    let select = document.querySelector('#select').value;
+
+function status(list, pno){
+    console.log('상태함수')
+     let orderArray = JSON.parse(localStorage.getItem('orderArray'));
+     for(let i=0; i<orderArray.length; i++){
+         if(orderArray[i].list==list && orderArray[i].pno==pno){ 
+             orderArray[i].status=document.querySelector(`select[name='${list}:${pno}']`).value;
+             localStorage.setItem('orderArray',JSON.stringify(orderArray));
+             console.log(orderArray)
+         }
+     }
+    
+ }
+/*
+function status(list){
+   console.log('상태함수')
+   let select=document.querySelector('select').value
     let orderArray = JSON.parse(localStorage.getItem('orderArray'));
-    for(let j=0; j<orderArray.length; j++){
-        if(i==orderArray[i]){ orderArray[i].status=select
+    for(let i=0; i<orderArray.length; i++){
+        if(orderArray[i].pno==list){ 
+            orderArray[i].status=select
             localStorage.setItem('orderArray',JSON.stringify(orderArray));
             console.log(orderArray)
+            // select1.innerHTML=orderArray[i].status;
         }
+        
     }
    
-}
+}*/
