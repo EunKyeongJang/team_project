@@ -1,18 +1,21 @@
 //====가상 데이터===
 /* 백엔드로부터 데이터를 받았다 치고 */
 let categoryArray = [
-    {cno : 1, cname : '신제품(NEW)'}, 
-    {cno : 2, cname : '프리미엄'}, 
-    {cno : 3, cname : '와퍼&주니어'}, 
-    {cno : 4, cname : '치킨&슈림프버거'}, 
-    {cno : 5, cname : '올데이킹&킹모닝'}
+    {cno : 1, cname : '메인메뉴'}, 
+    {cno : 2, cname : '닭발메뉴'}, 
+    {cno : 3, cname : '세트메뉴'}, 
+    {cno : 4, cname : '사이드/음료'}, 
+    {cno : 5, cname : '토핑'},
+    {cno : 6, cname : '밀키트'}
 ]
 
 /* 2. 제품목록 *제품 이미지명은 사진파일명이랑 동일하게 */
 let productArray=[
-{pno : 1, pname : '큐브스테이크와퍼', pprice : 19000, pimg : '', cno : 1},
-{pno : 2, pname : '스파이시 큐브스테이크와퍼', pprice : 25000, pimg : '', cno : 1},
-{pno : 3, pname : '더블비프불고기버거', pprice : 13000, pimg : '', cno : 5}    
+{pno : 1, pname : '엽기메뉴', pprice : 19000, pimg : '', cno : 1},
+{pno : 2, pname : '로제메뉴', pprice : 25000, pimg : '', cno : 1},
+{pno : 3, pname : '2인 엽기떡볶이', pprice : 13000, pimg : '', cno : 1},
+{pno : 2, pname : '마라떡볶이', pprice : 25000, pimg : '', cno : 1},
+{pno : 2, pname : '엽기닭볶음탕', pprice : 25000, pimg : '', cno : 1}
 ]
 
 let cartArray=[
@@ -131,7 +134,7 @@ function printCno(selectValue, outputId){   console.log('카테고리 번호 출
     }
 }//f end
 
-//@@이미지 등록 함수(경로 -> byte)
+//@@이미지 등록 함수 (제품등록)(경로 -> byte)
 let imgByte=``;
 function inputImg(event){console.log('inputImg()함수 실행')
     //!event : 이벤트를 발생한 결과정보객체
@@ -141,7 +144,25 @@ function inputImg(event){console.log('inputImg()함수 실행')
     let readFile= new FileReader(); //파일 읽기 생성
         //2. 파일을 JS로 읽어들이기[ 내가 등록한 파일을 ]
         readFile.readAsDataURL(event.target.files[0]);
-        console.log(readFile);
+        console.log(`readFile : `+readFile);
+        //3. 읽어온 바이트를 img 태그에 출력
+        readFile.onload=function(){
+            imgByte=readFile.result;
+        }
+
+}
+//@@이미지 등록 함수 end
+
+//@@이미지 등록 함수 (제품등록)(경로 -> byte)
+function inputImgChange(event){console.log('inputImg()함수 실행')
+    //!event : 이벤트를 발생한 결과정보객체
+
+    //[1]첨부파일 input에 등록된 파일을 바이트 가ㅏ져오기
+        //1. 파일 읽기 클래서[객체,설계도],newFileReader();
+    let readFile= new FileReader(); //파일 읽기 생성
+        //2. 파일을 JS로 읽어들이기[ 내가 등록한 파일을 ]
+        readFile.readAsDataURL(event.target.files[0]);
+        console.log(`readFile : `+readFile);
         //3. 읽어온 바이트를 img 태그에 출력
         readFile.onload=function(){
             imgByte=readFile.result;
@@ -284,7 +305,7 @@ function changeProduct(changePno){  console.log(`제품수정 폼 출력 함수 
             <span> <input id="changePno" class="PheadA" type="text" value="${changePno}" disabled/>  </span>
             <span> <input id="changePname" class="PheadB" type="text" value="${changePname}"/> </span>
             <span> <input id="changePprice" class="PheadC" type="text" value="${changePprice}"/> </span>
-            <span> <input id="changePimg" class="PheadD" type="file"> </span>
+            <span> <input onchange="inputImgChange(event)" id="changePimg" class="PheadD" type="file"> </span>
             <span class="PheadE">
                 <input onclick="changePermit(${changePno})" type="button" value="확인">
                 <input onclick="changeCancel(${changePno})" type="button" value="취소">
@@ -298,9 +319,9 @@ function changeProduct(changePno){  console.log(`제품수정 폼 출력 함수 
     //제품수정>확인 클릭
 function changePermit(changePno){   console.log(`제품수정 확인클릭 실행`);
     let productArray = JSON.parse(localStorage.getItem('productArray')); console.log(productArray);//기존 제품함수 호출
-                if(productArray==null){
-                    productArray=[];    //만약에 localStorage에 아무것도 없으면 배열 선언
-                }
+        if(productArray==null){
+            productArray=[];    //만약에 localStorage에 아무것도 없으면 배열 선언
+        }
 
     const changePname=document.querySelector('#changePname').value;
     const changePprice=document.querySelector('#changePprice').value;
@@ -323,7 +344,7 @@ function changePermit(changePno){   console.log(`제품수정 확인클릭 실�
         if(productArray[i].pno==changePno){
             productArray[i].pname=changePname;
             productArray[i].pprice=changePprice;
-            productArray[i].pimg=changePimg;
+            productArray[i].pimg=imgByte;
         }
     }
 
