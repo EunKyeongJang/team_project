@@ -5,7 +5,12 @@
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <title>Page Title</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <script src='orderlist.js'></script>
+
+    <link rel='stylesheet' type='text/css' media='screen' href='/css/admin.css'>
+
+    <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+    <script src='/admin/orderlist/orderlist.js'></script>
+    <script src="/admin/common.js"></script>
     <style>
         #wrap{
             width: 900px;
@@ -20,6 +25,7 @@
    
 </head>
 <body>
+    <div id="header">   </div>
     <div id="wrap">
         <input  onclick="order()" type="button" value="주문하기">
         <h3>주문내역</h3>

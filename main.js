@@ -90,18 +90,15 @@ document.addEventListener('DOMContentLoaded',function(){
                 // 상품을 클릭했을때 만약 배열에 등록되어있는 인덱스번째 상품번호가 같으면 카운트 +1
             console.log(event);
         let cartArray=JSON.parse(localStorage.getItem('cartArray'));
-        if(cartArray==null){cartArray=[]};  // ?????????????????????????
+        if(cartArray==null){cartArray=[]};
         
-        // ch 스위치 기본 false 배열 하나씩 찾아서 만약 카트 배열 pno랑 이벤트랑 같으면 카운트에 플러스 1 하고 스위치 true
-        // 만약 카트 배열 pno랑 이벤트랑 같지 않으면 
-        let ch = false; 
+        let ch = false;                         console.log(ch);
         for( let i = 0 ; i<JScartArray.length ; i++){
             if( JScartArray[i].pno == event ){
                 JScartArray[i].count += 1 ;
                 cartArray[i].count += 1;
-                ch = true;
+                ch = true;                      console.log(ch);
             }
-        // ch 스위치가 true이면 이벤트를 pno로 카운트는 1로 객체화해서 배열에 푸시
         }
         if( !ch ){
             // 객체화
@@ -113,7 +110,7 @@ document.addEventListener('DOMContentLoaded',function(){
             cartArray.push(product);
             JScartArray.push(product);
         }
-
+                                                console.log(ch);
     // ========================== !!!!! 로컬스토리지 등록 !!!!! ========================== //
         localStorage.setItem('cartArray',JSON.stringify(cartArray));
         cartPrint(event)
